@@ -5,6 +5,7 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import { Saludo, Boton, Usuario } from './practicas-campus/virtual-DOM'
 import { Contador } from './practicas-campus/useState'
+import Tarjeta from './practicas-campus/Tarjeta'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,6 +17,8 @@ function App() {
       <Boton/> {/* Aquí se renderiza el componente Boton */}
       <Usuario nombre="Jonathan"/> {/* Aquí se renderiza el componente Usuario con la prop nombre */}
       <Contador/> {/* Aquí se renderiza el componente Contador */}
+      
+      <Tarjeta titulo="Título de la tarjeta" descripcion="Descripción de la tarjeta"/> {/* Aquí se renderiza el componente Tarjeta con las props titulo y descripcion */}
 
       <section id="center">
         <div className="hero">
