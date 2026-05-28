@@ -12,7 +12,6 @@ function App() {
 
   return (
     <>
-
       <Saludo/> {/* Aquí se renderiza el componente Saludo */}
       <Boton/> {/* Aquí se renderiza el componente Boton */}
       <Usuario nombre="Jonathan"/> {/* Aquí se renderiza el componente Usuario con la prop nombre */}
