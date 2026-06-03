@@ -1,15 +1,17 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 
 function App() {
-  const [tareas, setTareas] = useState([]);
+  const [tareas, setTareas] = useState(() => {
+    const tareasGuardadas = localStorage.getItem("tareas");
+    return tareasGuardadas ? JSON.parse(tareasGuardadas) : [];
+  });
+
   const [nuevaTarea, setNuevaTarea] = useState("");
   const [duracion, setDuracion] = useState("");
 
-  /*
-  const calcularTiempoTotal = useMemo(() => {
-    return tareas.reduce((total, tarea) => total + tarea.duracion, 0);
+  useEffect(() => {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
   }, [tareas]);
-  */
 
   // Cálculo de tiempo total optimizado con useMemo
   // Lo definimos ANTES del useEffect para mayor claridad
@@ -36,10 +38,14 @@ function App() {
     }
   };
 
+  const eliminarTarea = (indexBorrar) => {
+    const tareasActualizadas = tareas.filter((_, index) => index !== indexBorrar);
+    setTareas(tareasActualizadas);
+  }
 
   return (
     <>
-      <div>
+      <div style={{ padding: '20PX' }}>
         <h1>Contador de Tareas</h1>
         <div>
           <input
@@ -60,7 +66,12 @@ function App() {
         <h2>Tareas</h2>
         <ul>
           {tareas.map((tarea, index) => (
-            <li key={index}>{tarea.nombre}: {tarea.duracion} minutos</li>
+            <li key={index}>
+              {tarea.nombre}: {tarea.duracion} minutos
+              <button onClick={() => eliminarTarea(index)} style={{ marginLeft: '10px' }}>
+                Eliminar
+              </button>
+            </li>
           ))}
         </ul>
 
