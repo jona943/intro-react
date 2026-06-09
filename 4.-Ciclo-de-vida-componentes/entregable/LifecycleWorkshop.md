@@ -78,7 +78,7 @@
 ```javascript
 // App.jsx
 import React, { useState, useEffect, useMemo } from 'react';
-import Planeta from './Planeta';
+import Planeta from './Planeta';pus
 
 function App() {
   // ... (estado)
