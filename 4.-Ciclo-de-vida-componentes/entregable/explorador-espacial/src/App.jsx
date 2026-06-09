@@ -4,19 +4,27 @@ import Planeta from "./components/Planeta"
 
 function App() {
 
-  const [ distancia, setDistancia ] = useState(0);
-  const [ combustible, setCombustible ] = useState(100);
-  const [ estadoNave, setEstadoNave ] = useState('En orbita');
-  const [ PlanetaVisitados, setPlanetaVisitados ] = useState(["Mercurio", "Venus", "Tierra", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno"]);
+  const [distancia, setDistancia] = useState(0);
+  const [combustible, setCombustible] = useState(100);
+  const [estadoNave, setEstadoNave] = useState('En orbita');
+  const [PlanetaVisitados, setPlanetaVisitados] = useState(["Mercurio", "Venus", "Tierra", "Marte", "Júpiter", "Saturno", "Urano", "Neptuno"]);
 
   // MONTAJE Y DESMONTAJE
   useEffect(() => {
     console.log("Panel renderizado");
 
     const intervalo = setInterval(() => {
-      setDistancia( prev => prev + 1); // Incrementa la distancia
-      setCombustible( prev => prev - 1); // Decrementa el combustible
-      console.log("Vuelo iniciado");
+      setCombustible((prevFuel) => {
+        if (prevFuel <= 0) {
+          console.log("Combustible agotado, nave detenida");
+          setEstadoNave("Detenida");
+          clearInterval(intervalo); // Se detiene si ese cumple la condición de combustible agotado
+          return 0; // Evita que el combustible sea negativo
+        }
+        setDistancia((prevDistance) => prevDistance + 1); // Incrementa la distancia cada segundo
+        return prevFuel - 1; // <---------------------------------------------
+
+      });
     }, 1000);
 
     return () => {
@@ -40,7 +48,6 @@ function App() {
     const nuevoPlaneta = `Planeta nuevo${PlanetaVisitados.length + 1}`;
     setPlanetaVisitados(prev => [...prev, nuevoPlaneta]);
   }
-
 
   return (
     <div>
