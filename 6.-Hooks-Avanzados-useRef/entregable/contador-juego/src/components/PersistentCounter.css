@@ -1,0 +1,67 @@
+.persistent-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.counter-display {
+  font-size: 3rem;
+  color: #2c3e50;
+  margin: 20px 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.btn {
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  transition: transform 0.1s, background-color 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.btn-increment { background-color: #4caf50; color: white; }
+.btn-decrement { background-color: #f44336; color: white; }
+.btn-reset { background-color: #2196f3; color: white; }
+
+.history-card {
+  text-align: left;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  border-left: 5px solid #2196f3;
+}
+
+.history-list {
+  list-style: none;
+  padding: 0;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.history-item {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+  color: #444;
+}
+
+.history-item:last-child {
+  background-color: #e3f2fd;
+  font-weight: bold;
+}

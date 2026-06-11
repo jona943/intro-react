@@ -1,9 +1,9 @@
-import CounterGame from "./components/CounterGame"
+import PersistentCounter from "./components/PersistentCounter"
 
 function App() {
   return (
     <>
-      <CounterGame/>
+      <PersistentCounter />
     </>
   )
 }
