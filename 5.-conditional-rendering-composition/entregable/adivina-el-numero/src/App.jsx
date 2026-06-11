@@ -1,9 +1,12 @@
+import Game from './components/Game';
+import './App.css';
+
 function App() {
   return (
-    <>
-      <h1>Adivina el número</h1>
-    </>
-  )
+    <div className="App">
+      <Game />
+    </div>
+  );
 }
 
-export default App
+export default App;
