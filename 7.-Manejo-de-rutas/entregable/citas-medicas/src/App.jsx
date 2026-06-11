@@ -7,12 +7,12 @@ import NotFound from './components/NotFound';
 function App() {
   return (
     <BrowserRouter>
-      <nav style={{ padding: '1rem', borderBottom: '1px solid #ccc', marginBottom: '1rem' }}>
-        <Link to="/" style={{ marginRight: '1rem' }}>Inicio</Link>
+      <nav>
+        <Link to="/">Inicio</Link>
         <Link to="/citas">Ver Citas</Link>
       </nav>
 
-      <div style={{ padding: '1rem' }}>
+      <div className="container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/citas" element={<Citas />} />
