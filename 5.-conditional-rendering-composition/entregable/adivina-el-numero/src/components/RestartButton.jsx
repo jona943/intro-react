@@ -1,6 +1,8 @@
-function RestartButton() {
+function RestartButton({ onRestart }) {
   return (
-    <button>Reiniciar Juego</button>
+    <button onClick={onRestart} className="restart-btn">
+      Jugar de nuevo
+    </button>
   );
 }
 

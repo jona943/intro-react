@@ -1,6 +1,6 @@
-function Message() {
+function Message({ text }) {
   return (
-    <p>Aquí aparecerá el mensaje</p>
+    <p className="message">{text}</p>
   );
 }
 

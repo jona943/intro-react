@@ -1,6 +1,11 @@
-function InputNumber() {
+function InputNumber({ value, onChange }) {
   return (
-    <input type="number" placeholder="Introduce un número" />
+    <input
+      type="number"
+      value={value}
+      onChange={onChange}
+      placeholder="Introduce un número"
+    />
   );
 }
 
