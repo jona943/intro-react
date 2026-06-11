@@ -23,12 +23,19 @@ export function reducer(state, action) {
 
 export default function CounterGame() {
     const [ state, dispatch ] = useReducer (reducer, initialState);
+    const incrementBtnRef = useRef(null);
+    // Memorizamos la función de incremento 
+    useEffect(() => {
+        if (incrementBtnRef.current) {
+            incrementBtnRef.current.focus();
+        }
+    }, []); // [] significa que la función no depende de ningun valor externo
 
     return(
         <div>
             <h1>Contador : {state.count}</h1>
 
-            <button onClick={() => dispatch({ type: "incremento"})}> + </button>
+            <button ref={incrementBtnRef} onClick={() => dispatch({ type: "incremento"})}> + </button>
             <button onClick={() => dispatch({ type: "decremento"})}> - </button>
             <button onClick={() => dispatch({ type: "reset"})}> Reset </button>
 
