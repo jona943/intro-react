@@ -1,7 +1,9 @@
+import CounterGame from "./components/CounterGame"
+
 function App() {
   return (
     <>
-      <h1>Hola Mundo</h1>
+      <CounterGame/>
     </>
   )
 }
