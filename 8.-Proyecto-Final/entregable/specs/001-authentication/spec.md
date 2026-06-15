@@ -39,8 +39,15 @@ Implementar un sistema de acceso que permita identificar al usuario, proteger su
 - **Efectos**:
     - Bordes redondeados en todos los contenedores.
     - Efecto "Liquid Crystal" (Glassmorphism) con opacidad casi transparente.
+    - **Refinamiento**: Brillos de borde (border-glow) y sombras internas para profundidad.
+    - **Textura**: Efecto de ruido sutil (grain) en paneles de cristal.
+- **Layout**:
+    - Estructura de tres columnas inspirada en X (Sidebar Izquierdo, Feed Central, Panel de Tendencias Derecho).
 - **Paleta de Colores**:
     - Base: Oscuros (Negros/Grises profundos).
     - Acentos: Naranjas vibrantes.
     - Tonos: Escala de grises para profundidad.
-- **Interactividad**: Ventanas que parecen flotar con desenfoque de fondo (backdrop-filter).
+- **Interactividad**: 
+    - Ventanas que parecen flotar con desenfoque de fondo.
+    - Animaciones suaves de transición entre páginas.
+    - Iconografía minimalista con efectos de resplandor.

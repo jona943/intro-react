@@ -13,13 +13,14 @@ Este documento contiene la lista de tareas atómicas para la implementación del
 - [x] Implementar estado `user` y persistencia con `localStorage` en `App.jsx`.
 - [x] Crear componentes de página básicos (`Home`, `Login`, `Profile`).
 
-## Fase 3: Refinamiento y Estilos (A estética 2010s Liquid Crystal)
+## Fase 3: Refinamiento y Estilos (X Liquid Crystal Evolution)
 - [x] Extraer estilos a `src/index.css`.
-- [ ] Definir variables CSS y efectos de Glassmorphism.
-- [ ] Rediseñar interfaz general (Navbar y Contenedores) con efecto redondeado y transparente.
-- [ ] Aplicar diseño vintage naranja/oscuro a `Login.jsx`.
-- [ ] Aplicar diseño vintage naranja/oscuro a `Home.jsx` y `Profile.jsx`.
-- [ ] Validar legibilidad con opacidad baja.
+- [x] Rediseñar interfaz general (Navbar y Contenedores) con efecto redondeado y transparente.
+- [ ] Implementar tercera columna (Panel de Tendencias) con diseño de cristal.
+- [ ] Añadir efectos de profundidad (border-glow e inset shadows) en CSS.
+- [ ] Integrar iconografía minimalista en el Sidebar.
+- [ ] Aplicar animaciones de transición entre rutas.
+- [ ] Refinar diseño de inputs y botones con estética 2010s.
 
 ## Fase 4: Verificación Final
 - [ ] Realizar pruebas manuales según los criterios de aceptación en `spec.md`.

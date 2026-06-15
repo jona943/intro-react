@@ -1,8 +1,13 @@
 const Profile = ({ user }) => {
   return (
-    <div>
-      <h1>Tu Perfil</h1>
-      <p>Nombre de usuario: {user.username}</p>
+    <div className="glass-card">
+      <h1>Perfil</h1>
+      <div className="user-info">
+        <p>Nombre de usuario: <strong>{user.username}</strong></p>
+        <p style={{ fontSize: '0.9rem', marginTop: '1rem' }}>
+          Esta es una sección privada de tu cuenta.
+        </p>
+      </div>
     </div>
   );
 };

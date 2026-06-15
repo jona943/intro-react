@@ -14,12 +14,12 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div>
-      <h1>Iniciar Sesión</h1>
+    <div className="glass-card">
+      <h1>Acceso</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Nombre de usuario"
+          placeholder="Usuario"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
