@@ -34,11 +34,13 @@ Implementar un sistema de acceso que permita identificar al usuario, proteger su
     - La ruta `/profile` (Perfil) solo es accesible si hay una sesión activa.
     - Si un usuario no logueado intenta entrar a `/profile`, debe ser redirigido a `/login`.
 
-### 4. Cierre de Sesión (Logout)
-- **Como** usuario autenticado,
-- **Quiero** poder cerrar mi sesión,
-- **Para** salir de mi cuenta de forma segura.
-- **Criterios de Aceptación**:
-    - Debe existir un botón para "Cerrar sesión".
-    - Al pulsarlo, se deben borrar los datos del usuario del estado y de `localStorage`.
-    - El usuario debe ser redirigido al Login o al Home (modo invitado).
+### 5. Requerimientos Visuales (Estética)
+- **Estilo General**: Minimalista con un toque "vintage" de los años 2010.
+- **Efectos**:
+    - Bordes redondeados en todos los contenedores.
+    - Efecto "Liquid Crystal" (Glassmorphism) con opacidad casi transparente.
+- **Paleta de Colores**:
+    - Base: Oscuros (Negros/Grises profundos).
+    - Acentos: Naranjas vibrantes.
+    - Tonos: Escala de grises para profundidad.
+- **Interactividad**: Ventanas que parecen flotar con desenfoque de fondo (backdrop-filter).

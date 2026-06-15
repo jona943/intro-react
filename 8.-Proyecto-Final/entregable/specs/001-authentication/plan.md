@@ -37,7 +37,16 @@ src/
 - **Home.jsx**: Muestra un mensaje de bienvenida. Si el usuario está logueado, muestra su nombre y el botón de "Cerrar sesión".
 - **Profile.jsx**: Muestra la información del perfil (nombre de usuario).
 
-## 5. Pruebas de Verificación
+## 5. Implementación Estética (Liquid Crystal & 2010s Vintage)
+- **CSS Variables**: Definir la paleta (naranja #ff6600, gris oscuro #1a1a1a).
+- **Glassmorphism**: 
+    - `background: rgba(255, 255, 255, 0.05)`
+    - `backdrop-filter: blur(10px)`
+    - `border: 1px solid rgba(255, 255, 255, 0.1)`
+- **Redondeado**: `border-radius: 20px` o superior.
+- **Efecto Liquid Crystal**: Sombras suaves internas y brillos sutiles en los bordes para simular cristal líquido.
+
+## 6. Pruebas de Verificación
 1. Abrir la app en `/`.
 2. Intentar ir a `/profile` manualmente y verificar que redirige a `/login`.
 3. Iniciar sesión en `/login`.
