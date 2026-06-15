@@ -28,24 +28,45 @@ function App() {
 
   return (
     <Router>
+      <div className="grain-overlay"></div>
       <div className="app-layout">
-        {/* Sidebar Navigation similar to X */}
-        <nav>
-          <div className="logo-x">𝕏</div>
-          <NavLink to="/" end>Inicio</NavLink>
-          <NavLink to="/profile">Perfil</NavLink>
-          {!user && <NavLink to="/login">Login</NavLink>}
+        {/* Sidebar Navigation - Icons + Text */}
+        <nav className="sidebar">
+          <div className="sidebar-header">
+            <div className="logo-x">𝕏</div>
+          </div>
+          
+          <NavLink to="/" end className={({ isActive }) => isActive ? "active" : ""}>
+            <i className="fa-solid fa-house"></i>
+            <span className="sidebar-label">Inicio</span>
+          </NavLink>
+          
+          <NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""}>
+            <i className="fa-solid fa-user"></i>
+            <span className="sidebar-label">Perfil</span>
+          </NavLink>
+          
+          {!user && (
+            <NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""}>
+              <i className="fa-solid fa-key"></i>
+              <span className="sidebar-label">Login</span>
+            </NavLink>
+          )}
+
           {user && (
-            <button className="logout-btn" onClick={logout} style={{marginTop: 'auto'}}>
-              Cerrar sesión
-            </button>
+            <div className="logout-btn-container">
+              <button className="logout-btn" onClick={logout}>
+                <i className="fa-solid fa-right-from-bracket"></i>
+                <span className="sidebar-label">Salir</span>
+              </button>
+            </div>
           )}
         </nav>
 
-        {/* Main Content Feed Area */}
+        {/* Main Content Area */}
         <main className="main-content">
           <div className="page-header">
-            <h2>Clon de Twitter</h2>
+            <h2>{user ? `Hola, ${user.username}` : "Clon de Twitter"}</h2>
           </div>
           
           <div className="container">
@@ -59,6 +80,25 @@ function App() {
             </Routes>
           </div>
         </main>
+
+        {/* Right Sidebar - Trends */}
+        <aside className="trends-sidebar">
+          <div className="glass-card trends-card">
+            <h3>Qué está pasando</h3>
+            <div className="trend-item">
+              <span>Tendencia en React</span>
+              <p>#SpecKit</p>
+            </div>
+            <div className="trend-item">
+              <span>Tecnología · Tendencia</span>
+              <p>#LiquidCrystal</p>
+            </div>
+            <div className="trend-item">
+              <span>Diseño · Vintage</span>
+              <p>#Glassmorphism2010</p>
+            </div>
+          </div>
+        </aside>
       </div>
     </Router>
   );
