@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Clone - Static Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grain-overlay"></div>
+    
+    <div id="app" class="app-layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-x">𝕏</div>
+            </div>
+            
+            <a href="#" id="nav-home" class="active">
+                <i class="fa-solid fa-house"></i>
+                <span class="sidebar-label">Inicio</span>
+            </a>
+            
+            <a href="#" id="nav-profile">
+                <i class="fa-solid fa-user"></i>
+                <span class="sidebar-label">Perfil</span>
+            </a>
+            
+            <a href="#" id="nav-login">
+                <i class="fa-solid fa-key"></i>
+                <span class="sidebar-label">Login</span>
+            </a>
+
+            <div id="logout-container" class="logout-btn-container" style="display: none;">
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="sidebar-label">Salir</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h2 id="page-title">Clon de Twitter</h2>
+            </div>
+            
+            <div id="content-area" class="container">
+                <!-- Secciones dinámicas se cargarán aquí -->
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="trends-sidebar">
+            <div class="glass-card trends-card">
+                <h3>Qué está pasando</h3>
+                <div class="trend-item">
+                    <span>Tendencia en JS</span>
+                    <p>#VanillaPower</p>
+                </div>
+                <div class="trend-item">
+                    <span>Tecnología · Tendencia</span>
+                    <p>#StaticWeb</p>
+                </div>
+                <div class="trend-item">
+                    <span>Diseño · Vintage</span>
+                    <p>#Web2010</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Templates for dynamic content -->
+    <template id="tpl-login">
+        <div class="glass-card login-container">
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <input type="text" id="username-input" placeholder="Nombre de usuario" required>
+                <button type="submit" style="margin-top: 1rem;">Entrar</button>
+            </form>
+        </div>
+    </template>
+
+    <template id="tpl-home">
+        <div class="home-page">
+            <div class="glass-card welcome-card">
+                <h1>Inicio</h1>
+                <p id="welcome-message">Bienvenido al clon estático.</p>
+            </div>
+            
+            <div id="tweet-form-root"></div>
+            <div id="tweet-list-root"></div>
+        </div>
+    </template>
+
+    <template id="tpl-profile">
+        <div class="profile-page">
+            <div class="glass-card profile-info-card">
+                <h1>Perfil</h1>
+                <div class="user-info">
+                    <p>Nombre de usuario: <strong id="profile-username"></strong></p>
+                    <p style="font-size: 0.9rem; margin-top: 1rem;">
+                        Esta es una sección privada de tu cuenta.
+                    </p>
+                </div>
+            </div>
+            <h3 class="section-title">Mis Publicaciones</h3>
+            <div id="profile-tweet-list"></div>
+        </div>
+    </template>
+
+    <template id="tpl-tweet-form">
+        <div class="glass-card tweet-form-container">
+            <form id="tweet-form">
+                <textarea id="tweet-input" placeholder="¿Qué está pasando?" rows="3"></textarea>
+                <div class="tweet-form-actions">
+                    <button type="submit" id="post-btn">Postear</button>
+                </div>
+            </form>
+        </div>
+    </template>
+
+    <template id="tpl-tweet-item">
+        <div class="glass-card tweet-item">
+            <div class="tweet-header">
+                <span class="tweet-author"></span>
+                <span class="tweet-date"></span>
+            </div>
+            <div class="tweet-content">
+                <p class="content-text"></p>
+                <div class="edit-mode" style="display: none;">
+                    <textarea class="edit-input" rows="2"></textarea>
+                    <div class="edit-actions">
+                        <button class="save-btn">Guardar</button>
+                        <button class="cancel-btn">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tweet-actions" style="display: none;">
+                <button class="action-btn edit"><i class="fa-solid fa-pen"></i></button>
+                <button class="action-btn delete"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Firebase SDK -->
+    <script type="importmap">
+    {
+      "imports": {
+        "firebase/app": "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js",
+        "firebase/firestore": "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"
+      }
+    }
+    </script>
+    <script type="module" src="script.js"></script>
+</body>
+</html>
