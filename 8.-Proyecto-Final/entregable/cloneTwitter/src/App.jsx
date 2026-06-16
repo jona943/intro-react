@@ -3,22 +3,35 @@ import { BrowserRouter as Router, Routes, Route, Navigate, NavLink } from "react
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import { 
+  fetchTweetsFromDB, 
+  addTweetToDB, 
+  updateTweetInDB, 
+  deleteTweetFromDB 
+} from "./firebase/tweetService";
 import "./index.css";
 
 function App() {
   const [user, setUser] = useState(null);
   const [tweets, setTweets] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Auth simple con localStorage
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
 
-    const savedTweets = localStorage.getItem("tweets");
-    if (savedTweets) {
-      setTweets(JSON.parse(savedTweets));
-    }
+    // Cargar tweets desde Firebase
+    const loadTweets = async () => {
+      setIsLoading(true);
+      const data = await fetchTweetsFromDB();
+      setTweets(data);
+      setIsLoading(false);
+    };
+
+    loadTweets();
   }, []);
 
   const login = (username) => {
@@ -32,30 +45,37 @@ function App() {
     localStorage.removeItem("user");
   };
 
-  const addTweet = (content) => {
-    const newTweet = {
-      id: Date.now(),
-      author: user.username,
-      content,
-      createdAt: new Date().toISOString(),
-    };
-    const updatedTweets = [newTweet, ...tweets];
-    setTweets(updatedTweets);
-    localStorage.setItem("tweets", JSON.stringify(updatedTweets));
+  const addTweet = async (content) => {
+    try {
+      const newTweetData = {
+        author: user.username,
+        content
+      };
+      const newTweet = await addTweetToDB(newTweetData);
+      setTweets([newTweet, ...tweets]);
+    } catch (error) {
+      alert("Error al publicar el tweet");
+    }
   };
 
-  const editTweet = (id, newContent) => {
-    const updatedTweets = tweets.map((tweet) =>
-      tweet.id === id ? { ...tweet, content: newContent } : tweet
-    );
-    setTweets(updatedTweets);
-    localStorage.setItem("tweets", JSON.stringify(updatedTweets));
+  const editTweet = async (id, newContent) => {
+    try {
+      await updateTweetInDB(id, newContent);
+      setTweets(tweets.map((tweet) =>
+        tweet.id === id ? { ...tweet, content: newContent } : tweet
+      ));
+    } catch (error) {
+      alert("Error al editar el tweet");
+    }
   };
 
-  const deleteTweet = (id) => {
-    const updatedTweets = tweets.filter((tweet) => tweet.id !== id);
-    setTweets(updatedTweets);
-    localStorage.setItem("tweets", JSON.stringify(updatedTweets));
+  const deleteTweet = async (id) => {
+    try {
+      await deleteTweetFromDB(id);
+      setTweets(tweets.filter((tweet) => tweet.id !== id));
+    } catch (error) {
+      alert("Error al eliminar el tweet");
+    }
   };
 
   return (
@@ -102,36 +122,42 @@ function App() {
           </div>
           
           <div className="container">
-            <Routes>
-              <Route 
-                path="/" 
-                element={
-                  <Home 
-                    user={user} 
-                    tweets={tweets} 
-                    onAddTweet={addTweet}
-                    onEditTweet={editTweet}
-                    onDeleteTweet={deleteTweet}
-                  />
-                } 
-              />
-              <Route path="/login" element={<Login onLogin={login} />} />
-              <Route 
-                path="/profile" 
-                element={
-                  user ? (
-                    <Profile 
+            {isLoading ? (
+              <div className="glass-card loading-container">
+                <p>Cargando datos de la nube...</p>
+              </div>
+            ) : (
+              <Routes>
+                <Route 
+                  path="/" 
+                  element={
+                    <Home 
                       user={user} 
-                      tweets={tweets}
+                      tweets={tweets} 
+                      onAddTweet={addTweet}
                       onEditTweet={editTweet}
                       onDeleteTweet={deleteTweet}
                     />
-                  ) : (
-                    <Navigate to="/login" />
-                  )
-                } 
-              />
-            </Routes>
+                  } 
+                />
+                <Route path="/login" element={<Login onLogin={login} />} />
+                <Route 
+                  path="/profile" 
+                  element={
+                    user ? (
+                      <Profile 
+                        user={user} 
+                        tweets={tweets}
+                        onEditTweet={editTweet}
+                        onDeleteTweet={deleteTweet}
+                      />
+                    ) : (
+                      <Navigate to="/login" />
+                    )
+                  } 
+                />
+              </Routes>
+            )}
           </div>
         </main>
 

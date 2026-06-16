@@ -31,5 +31,12 @@ Este documento contiene la lista de tareas atómicas para la implementación del
 - [x] Integrar feed global en `Home` y feed personal en `Profile`.
 - [x] Estilizar componentes con estética Glassmorphism.
 
-## Fase 5: Verificación Final
+## Fase 5: Integración con Firebase (Base de Datos Real)
+- [x] Instalar SDK de Firebase.
+- [x] Configurar variables de entorno (`.env`).
+- [x] Crear servicio de base de datos (`tweetService.js`) con Firestore.
+- [x] Refactorizar `App.jsx` para usar operaciones asíncronas de la nube.
+- [x] Implementar estado de carga (`isLoading`) para la sincronización inicial.
+
+## Fase 6: Verificación Final
 - [ ] Realizar pruebas manuales según los criterios de aceptación en `spec.md`.
