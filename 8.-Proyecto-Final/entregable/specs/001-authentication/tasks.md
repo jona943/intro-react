@@ -16,11 +16,12 @@ Este documento contiene la lista de tareas atómicas para la implementación del
 ## Fase 3: Refinamiento y Estilos (X Liquid Crystal Evolution)
 - [x] Extraer estilos a `src/index.css`.
 - [x] Rediseñar interfaz general (Navbar y Contenedores) con efecto redondeado y transparente.
-- [ ] Implementar tercera columna (Panel de Tendencias) con diseño de cristal.
-- [ ] Añadir efectos de profundidad (border-glow e inset shadows) en CSS.
-- [ ] Integrar iconografía minimalista en el Sidebar.
-- [ ] Aplicar animaciones de transición entre rutas.
-- [ ] Refinar diseño de inputs y botones con estética 2010s.
+- [x] Implementar tercera columna (Panel de Tendencias) con diseño de cristal.
+- [x] Añadir efectos de profundidad (border-glow e inset shadows) en CSS.
+- [x] Integrar iconografía minimalista en el Sidebar.
+- [x] Aplicar animaciones de transición entre rutas.
+- [x] Añadir efectos de resplandor en iconos (glow).
+- [x] Refinar diseño de inputs y botones con estética 2010s.
 
 ## Fase 4: Verificación Final
 - [ ] Realizar pruebas manuales según los criterios de aceptación en `spec.md`.

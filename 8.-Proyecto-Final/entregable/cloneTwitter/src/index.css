@@ -114,6 +114,16 @@ body {
   font-size: 1.4rem;
   width: 25px;
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+.sidebar a:hover i {
+  color: var(--accent-orange);
+  text-shadow: 0 0 10px rgba(255, 102, 0, 0.5);
+}
+
+.sidebar a.active i {
+  text-shadow: 0 0 15px rgba(255, 102, 0, 0.4);
 }
 
 .sidebar-label {
@@ -275,3 +285,4 @@ button:hover {
   color: #f4212e;
   border-color: rgba(244, 33, 46, 0.5);
 }
+
