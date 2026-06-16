@@ -23,5 +23,13 @@ Este documento contiene la lista de tareas atómicas para la implementación del
 - [x] Añadir efectos de resplandor en iconos (glow).
 - [x] Refinar diseño de inputs y botones con estética 2010s.
 
-## Fase 4: Verificación Final
+## Fase 4: Gestión de Tweets (Modular)
+- [x] Implementar estado global de tweets y persistencia en `App.jsx`.
+- [x] Crear componentes modulares: `TweetForm`, `TweetItem` y `TweetList`.
+- [x] Añadir soporte para fechas de publicación (timestamps).
+- [x] Implementar lógica de protección: solo autores editan/borran sus tweets.
+- [x] Integrar feed global en `Home` y feed personal en `Profile`.
+- [x] Estilizar componentes con estética Glassmorphism.
+
+## Fase 5: Verificación Final
 - [ ] Realizar pruebas manuales según los criterios de aceptación en `spec.md`.

@@ -7,11 +7,17 @@ import "./index.css";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [tweets, setTweets] = useState([]);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     if (savedUser) {
       setUser(JSON.parse(savedUser));
+    }
+
+    const savedTweets = localStorage.getItem("tweets");
+    if (savedTweets) {
+      setTweets(JSON.parse(savedTweets));
     }
   }, []);
 
@@ -24,6 +30,32 @@ function App() {
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
+  };
+
+  const addTweet = (content) => {
+    const newTweet = {
+      id: Date.now(),
+      author: user.username,
+      content,
+      createdAt: new Date().toISOString(),
+    };
+    const updatedTweets = [newTweet, ...tweets];
+    setTweets(updatedTweets);
+    localStorage.setItem("tweets", JSON.stringify(updatedTweets));
+  };
+
+  const editTweet = (id, newContent) => {
+    const updatedTweets = tweets.map((tweet) =>
+      tweet.id === id ? { ...tweet, content: newContent } : tweet
+    );
+    setTweets(updatedTweets);
+    localStorage.setItem("tweets", JSON.stringify(updatedTweets));
+  };
+
+  const deleteTweet = (id) => {
+    const updatedTweets = tweets.filter((tweet) => tweet.id !== id);
+    setTweets(updatedTweets);
+    localStorage.setItem("tweets", JSON.stringify(updatedTweets));
   };
 
   return (
@@ -71,11 +103,33 @@ function App() {
           
           <div className="container">
             <Routes>
-              <Route path="/" element={<Home user={user} logout={logout} />} />
+              <Route 
+                path="/" 
+                element={
+                  <Home 
+                    user={user} 
+                    tweets={tweets} 
+                    onAddTweet={addTweet}
+                    onEditTweet={editTweet}
+                    onDeleteTweet={deleteTweet}
+                  />
+                } 
+              />
               <Route path="/login" element={<Login onLogin={login} />} />
               <Route 
                 path="/profile" 
-                element={user ? <Profile user={user} /> : <Navigate to="/login" />} 
+                element={
+                  user ? (
+                    <Profile 
+                      user={user} 
+                      tweets={tweets}
+                      onEditTweet={editTweet}
+                      onDeleteTweet={deleteTweet}
+                    />
+                  ) : (
+                    <Navigate to="/login" />
+                  )
+                } 
               />
             </Routes>
           </div>
