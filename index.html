@@ -1,151 +1,134 @@
-<!-- VERSION: 2.1 - FIREBASE MODULE FIX -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twitter Clone - Static Demo</title>
+    <title>Portafolio React - DEV.F</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="8.-Proyecto-Final/entregable/demo/style.css">
+    <style>
+        :root {
+            --primary: #ff6600;
+            --bg: #000000;
+            --card-bg: rgba(22, 24, 28, 0.6);
+            --text: #e7e9ea;
+            --text-sec: #71767b;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .header { text-align: center; margin-bottom: 3rem; }
+        h1 { font-size: 2.5rem; color: var(--primary); margin: 0; }
+        p { color: var(--text-sec); font-size: 1.1rem; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(255, 102, 0, 0.1);
+        }
+
+        .card h3 { margin: 0; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
+        .card p { font-size: 0.9rem; margin: 0; }
+        .tag {
+            font-size: 0.7rem;
+            background: rgba(255, 102, 0, 0.2);
+            color: var(--primary);
+            padding: 0.2rem 0.6rem;
+            border-radius: 999px;
+            width: fit-content;
+        }
+
+        .footer { margin-top: auto; padding: 2rem; color: var(--text-sec); font-size: 0.8rem; }
+        
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
 </head>
 <body>
-    <div class="grain-overlay"></div>
-    
-    <div id="app" class="app-layout">
-        <!-- Sidebar -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <div class="logo-x">𝕏</div>
-            </div>
-            
-            <a href="#" id="nav-home" class="active">
-                <i class="fa-solid fa-house"></i>
-                <span class="sidebar-label">Inicio</span>
-            </a>
-            
-            <a href="#" id="nav-profile">
-                <i class="fa-solid fa-user"></i>
-                <span class="sidebar-label">Perfil</span>
-            </a>
-            
-            <a href="#" id="nav-login">
-                <i class="fa-solid fa-key"></i>
-                <span class="sidebar-label">Login</span>
-            </a>
-
-            <div id="logout-container" class="logout-btn-container" style="display: none;">
-                <button id="logout-btn" class="logout-btn">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    <span class="sidebar-label">Salir</span>
-                </button>
-            </div>
-        </nav>
-
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="page-header">
-                <h2 id="page-title">Clon de Twitter</h2>
-            </div>
-            
-            <div id="content-area" class="container">
-                <!-- Secciones dinámicas se cargarán aquí -->
-            </div>
-        </main>
-
-        <!-- Right Sidebar -->
-        <aside class="trends-sidebar">
-            <div class="glass-card trends-card">
-                <h3>Qué está pasando</h3>
-                <div class="trend-item">
-                    <span>Tendencia en JS</span>
-                    <p>#VanillaPower</p>
-                </div>
-                <div class="trend-item">
-                    <span>Tecnología · Tendencia</span>
-                    <p>#StaticWeb</p>
-                </div>
-                <div class="trend-item">
-                    <span>Diseño · Vintage</span>
-                    <p>#Web2010</p>
-                </div>
-            </div>
-        </aside>
+    <div class="header">
+        <h1>Portafolio React</h1>
+        <p>Mis prácticas y proyectos finales en el programa DEV.F</p>
     </div>
 
-    <!-- Templates for dynamic content -->
-    <template id="tpl-login">
-        <div class="glass-card login-container">
-            <h2>Iniciar Sesión</h2>
-            <form id="login-form">
-                <input type="text" id="username-input" placeholder="Nombre de usuario" required>
-                <button type="submit" style="margin-top: 1rem;">Entrar</button>
-            </form>
-        </div>
-    </template>
+    <div class="grid">
+        <!-- Proyecto Final -->
+        <a href="8.-Proyecto-Final/entregable/cloneTwitter/index.html" class="card" style="grid-column: 1 / -1; border-color: var(--primary);">
+            <span class="tag">PROYECTO FINAL</span>
+            <h3><i class="fa-brands fa-twitter"></i> Clon de Twitter (React + Firebase)</h3>
+            <p>Aplicación completa con autenticación, base de datos en tiempo real y persistencia.</p>
+        </a>
 
-    <template id="tpl-home">
-        <div class="home-page">
-            <div class="glass-card welcome-card">
-                <h1>Inicio</h1>
-                <p id="welcome-message">Bienvenido al clon estático.</p>
-            </div>
-            
-            <div id="tweet-form-root"></div>
-            <div id="tweet-list-root"></div>
-        </div>
-    </template>
+        <a href="8.-Proyecto-Final/entregable/demo/index.html" class="card">
+            <span class="tag">PROYECTO FINAL</span>
+            <h3><i class="fa-brands fa-js"></i> Clon de Twitter (Vanilla JS)</h3>
+            <p>Versión estática interactiva usando Firebase y JS puro.</p>
+        </a>
 
-    <template id="tpl-profile">
-        <div class="profile-page">
-            <div class="glass-card profile-info-card">
-                <h1>Perfil</h1>
-                <div class="user-info">
-                    <p>Nombre de usuario: <strong id="profile-username"></strong></p>
-                    <p style="font-size: 0.9rem; margin-top: 1rem;">
-                        Esta es una sección privada de tu cuenta.
-                    </p>
-                </div>
-            </div>
-            <h3 class="section-title">Mis Publicaciones</h3>
-            <div id="profile-tweet-list"></div>
-        </div>
-    </template>
+        <!-- Prácticas anteriores -->
+        <a href="7.-Manejo-de-rutas/entregable/citas-medicas/index.html" class="card">
+            <span class="tag">Módulo 7</span>
+            <h3><i class="fa-solid fa-route"></i> Manejo de Rutas</h3>
+            <p>Aplicación de citas médicas con React Router.</p>
+        </a>
 
-    <template id="tpl-tweet-form">
-        <div class="glass-card tweet-form-container">
-            <form id="tweet-form">
-                <textarea id="tweet-input" placeholder="¿Qué está pasando?" rows="3"></textarea>
-                <div class="tweet-form-actions">
-                    <button type="submit" id="post-btn">Postear</button>
-                </div>
-            </form>
-        </div>
-    </template>
+        <a href="6.-Hooks-Avanzados-useRef/entregable/contador-juego/index.html" class="card">
+            <span class="tag">Módulo 6</span>
+            <h3><i class="fa-solid fa-stopwatch"></i> Hooks Avanzados</h3>
+            <p>Uso de useRef para manipulación del DOM y timers.</p>
+        </a>
 
-    <template id="tpl-tweet-item">
-        <div class="glass-card tweet-item">
-            <div class="tweet-header">
-                <span class="tweet-author"></span>
-                <span class="tweet-date"></span>
-            </div>
-            <div class="tweet-content">
-                <p class="content-text"></p>
-                <div class="edit-mode" style="display: none;">
-                    <textarea class="edit-input" rows="2"></textarea>
-                    <div class="edit-actions">
-                        <button class="save-btn">Guardar</button>
-                        <button class="cancel-btn">Cancelar</button>
-                    </div>
-                </div>
-            </div>
-            <div class="tweet-actions" style="display: none;">
-                <button class="action-btn edit"><i class="fa-solid fa-pen"></i></button>
-                <button class="action-btn delete"><i class="fa-solid fa-trash"></i></button>
-            </div>
-        </div>
-    </template>
+        <a href="5.-conditional-rendering-composition/entregable/adivina-el-numero/index.html" class="card">
+            <span class="tag">Módulo 5</span>
+            <h3><i class="fa-solid fa-code-branch"></i> Renderizado Condicional</h3>
+            <p>Juego de adivina el número con composición de componentes.</p>
+        </a>
 
-    <!-- Cargamos script.js como módulo directamente -->
-    <script type="module" src="8.-Proyecto-Final/entregable/demo/script.js"></script>
+        <a href="4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/index.html" class="card">
+            <span class="tag">Módulo 4</span>
+            <h3><i class="fa-solid fa-rocket"></i> Ciclo de Vida</h3>
+            <p>Explorador espacial usando useEffect y peticiones a APIs.</p>
+        </a>
+
+        <a href="1.-Intro-a-react/entregable/mi-tarjeta/index.html" class="card">
+            <span class="tag">Módulo 1</span>
+            <h3><i class="fa-solid fa-id-card"></i> Introducción a React</h3>
+            <p>Mi primera tarjeta personal en React.</p>
+        </a>
+    </div>
+
+    <div class="footer">
+        © 2026 Jonathan Medina - Alumno DEV.F
+    </div>
 </body>
 </html>
