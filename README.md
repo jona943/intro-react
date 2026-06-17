@@ -4,6 +4,8 @@
 
 Este repositorio es mi portafolio de evidencias y prácticas del **Módulo 4 de 6**, cursado entre el **18 de mayo y el 12 de junio de 2026**.
 
+**🌐 Ver proyecto publicado:** [https://jona943.github.io/intro-react/](https://jona943.github.io/intro-react/)
+
 ---
 
 ## 📚 ¿Qué aprendí en este módulo?
