@@ -7,11 +7,25 @@ import {
   doc, 
   query, 
   orderBy,
-  onSnapshot
+  onSnapshot,
+  enableIndexedDbPersistence
 } from "firebase/firestore";
 import { db } from "./config";
 
 const TWEETS_COLLECTION = "tweets";
+
+// Habilitar persistencia offline para carga instantánea
+try {
+  enableIndexedDbPersistence(db).catch((err) => {
+    if (err.code === 'failed-precondition') {
+      console.warn("La persistencia falló: múltiples pestañas abiertas.");
+    } else if (err.code === 'unimplemented') {
+      console.warn("El navegador no soporta persistencia.");
+    }
+  });
+} catch (e) {
+  console.error("Error al habilitar persistencia:", e);
+}
 
 // Escuchador en tiempo real (Suscripción)
 export const subscribeToTweets = (callback) => {

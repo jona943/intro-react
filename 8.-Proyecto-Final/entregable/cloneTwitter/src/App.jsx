@@ -21,9 +21,10 @@ function App() {
 
   useEffect(() => {
     // Suscripción en tiempo real a Firebase
+    // onSnapshot ya trae los datos iniciales, no hace falta un fetch adicional
     const unsubscribe = subscribeToTweets((data) => {
       setTweets(data);
-      setIsLoading(false);
+      setIsLoading(false); // Deja de cargar en cuanto llega el primer paquete de datos
     });
 
     // Limpiar suscripción al desmontar el componente
