@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import { 
-  fetchTweetsFromDB, 
+  subscribeToTweets,
   addTweetToDB, 
   updateTweetInDB, 
   deleteTweetFromDB 
@@ -12,26 +12,22 @@ import {
 import "./index.css";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
   const [tweets, setTweets] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Auth simple con localStorage
-    const savedUser = localStorage.getItem("user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-
-    // Cargar tweets desde Firebase
-    const loadTweets = async () => {
-      setIsLoading(true);
-      const data = await fetchTweetsFromDB();
+    // Suscripción en tiempo real a Firebase
+    const unsubscribe = subscribeToTweets((data) => {
       setTweets(data);
       setIsLoading(false);
-    };
+    });
 
-    loadTweets();
+    // Limpiar suscripción al desmontar el componente
+    return () => unsubscribe();
   }, []);
 
   const login = (username) => {
@@ -51,9 +47,10 @@ function App() {
         author: user.username,
         content
       };
-      const newTweet = await addTweetToDB(newTweetData);
-      setTweets([newTweet, ...tweets]);
-    } catch (error) {
+      // No necesitamos actualizar el estado manualmente aquí,
+      // onSnapshot lo hará por nosotros automáticamente.
+      await addTweetToDB(newTweetData);
+    } catch {
       alert("Error al publicar el tweet");
     }
   };
@@ -61,10 +58,9 @@ function App() {
   const editTweet = async (id, newContent) => {
     try {
       await updateTweetInDB(id, newContent);
-      setTweets(tweets.map((tweet) =>
-        tweet.id === id ? { ...tweet, content: newContent } : tweet
-      ));
-    } catch (error) {
+      // Opcional: El estado se actualizará vía onSnapshot, 
+      // pero esto da una sensación de inmediatez (Optimistic UI)
+    } catch {
       alert("Error al editar el tweet");
     }
   };
@@ -72,8 +68,7 @@ function App() {
   const deleteTweet = async (id) => {
     try {
       await deleteTweetFromDB(id);
-      setTweets(tweets.filter((tweet) => tweet.id !== id));
-    } catch (error) {
+    } catch {
       alert("Error al eliminar el tweet");
     }
   };
@@ -82,7 +77,6 @@ function App() {
     <Router>
       <div className="grain-overlay"></div>
       <div className="app-layout">
-        {/* Sidebar Navigation - Icons + Text */}
         <nav className="sidebar">
           <div className="sidebar-header">
             <div className="logo-x">𝕏</div>
@@ -115,7 +109,6 @@ function App() {
           )}
         </nav>
 
-        {/* Main Content Area */}
         <main className="main-content">
           <div className="page-header">
             <h2>{user ? `Hola, ${user.username}` : "Clon de Twitter"}</h2>
@@ -161,7 +154,6 @@ function App() {
           </div>
         </main>
 
-        {/* Right Sidebar - Trends */}
         <aside className="trends-sidebar">
           <div className="glass-card trends-card">
             <h3>Qué está pasando</h3>

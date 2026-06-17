@@ -6,11 +6,26 @@ import {
   deleteDoc, 
   doc, 
   query, 
-  orderBy 
+  orderBy,
+  onSnapshot
 } from "firebase/firestore";
 import { db } from "./config";
 
 const TWEETS_COLLECTION = "tweets";
+
+// Escuchador en tiempo real (Suscripción)
+export const subscribeToTweets = (callback) => {
+  const q = query(collection(db, TWEETS_COLLECTION), orderBy("createdAt", "desc"));
+  return onSnapshot(q, (snapshot) => {
+    const tweets = snapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    }));
+    callback(tweets);
+  }, (error) => {
+    console.error("Error en suscripción de tweets:", error);
+  });
+};
 
 export const fetchTweetsFromDB = async () => {
   try {
@@ -34,7 +49,7 @@ export const addTweetToDB = async (tweetData) => {
     });
     return { id: docRef.id, ...tweetData };
   } catch (error) {
-    console.error("Error adding tweet:", error);
+    console.error("Error detallado al añadir tweet:", error);
     throw error;
   }
 };

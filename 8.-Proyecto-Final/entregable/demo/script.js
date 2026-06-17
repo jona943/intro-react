@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { 
     getFirestore, 
     collection, 
@@ -10,7 +10,7 @@ import {
     query, 
     orderBy,
     onSnapshot
-} from "firebase/firestore";
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 // Configuración de Firebase (Extraída de tu API temporal)
 const firebaseConfig = {
@@ -71,15 +71,20 @@ function updateAuthUI() {
 }
 
 // --- Escuchador de Firebase ---
-onSnapshot(query(collection(db, TWEETS_COLLECTION), orderBy("createdAt", "desc")), (snapshot) => {
-    tweets = snapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-    }));
-    // Refrescar la vista actual
-    if (navHome.classList.contains('active')) renderHome();
-    else if (navProfile.classList.contains('active')) renderProfile();
-});
+onSnapshot(
+    query(collection(db, TWEETS_COLLECTION), orderBy("createdAt", "desc")), 
+    (snapshot) => {
+        tweets = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        if (navHome.classList.contains('active')) renderHome();
+        else if (navProfile.classList.contains('active')) renderProfile();
+    },
+    (error) => {
+        console.error("Error en tiempo real de Firebase:", error);
+    }
+);
 
 // --- Renderizadores ---
 
@@ -149,7 +154,8 @@ function createTweetForm() {
                 });
                 input.value = '';
             } catch (error) {
-                alert("Error al publicar");
+                console.error("Error al publicar:", error);
+                alert("Error al publicar: " + error.message);
             }
         }
     });
@@ -184,7 +190,7 @@ function renderTweetList(container, tweetArray) {
             deleteBtn.onclick = async () => {
                 try {
                     await deleteDoc(doc(db, TWEETS_COLLECTION, tweet.id));
-                } catch (error) { alert("Error al eliminar"); }
+                } catch (error) { console.error(error); }
             };
 
             editBtn.onclick = () => {
@@ -203,7 +209,7 @@ function renderTweetList(container, tweetArray) {
                 if (newContent) {
                     try {
                         await updateDoc(doc(db, TWEETS_COLLECTION, tweet.id), { content: newContent });
-                    } catch (error) { alert("Error al editar"); }
+                    } catch (error) { console.error(error); }
                 }
             };
         }
