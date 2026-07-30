@@ -1,134 +1,622 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio React - DEV.F</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <style>
-        :root {
-            --primary: #ff6600;
-            --bg: #000000;
-            --card-bg: rgba(22, 24, 28, 0.6);
-            --text: #e7e9ea;
-            --text-sec: #71767b;
-        }
-        body {
-            background-color: var(--bg);
-            color: var(--text);
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .header { text-align: center; margin-bottom: 3rem; }
-        h1 { font-size: 2.5rem; color: var(--primary); margin: 0; }
-        p { color: var(--text-sec); font-size: 1.1rem; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>JS Master Playground Módulo 4 | Introducción a React</title>
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 1100px;
-        }
+  <!-- Google Fonts: Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Prism Syntax Highlighting Theme -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  
+  <link rel="stylesheet" href="style.css">
 
-        .card {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 1.5rem;
-            transition: all 0.3s;
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-            box-shadow: 0 10px 20px rgba(255, 102, 0, 0.1);
-        }
-
-        .card h3 { margin: 0; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; }
-        .card p { font-size: 0.9rem; margin: 0; }
-        .tag {
-            font-size: 0.7rem;
-            background: rgba(255, 102, 0, 0.2);
-            color: var(--primary);
-            padding: 0.2rem 0.6rem;
-            border-radius: 999px;
-            width: fit-content;
-        }
-
-        .footer { margin-top: auto; padding: 2rem; color: var(--text-sec); font-size: 0.8rem; }
-        
-        @media (max-width: 600px) {
-            body { padding: 1rem; }
-            h1 { font-size: 2rem; }
-        }
-    </style>
+  <!-- Lucide Icons & Parsers -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-jsx.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
 </head>
-<body>
-    <div class="header">
-        <h1>Portafolio React</h1>
-        <p>Mis prácticas y proyectos finales en el programa DEV.F</p>
+<body class="focus-preview">
+
+  <!-- Header Superior -->
+  <header>
+    <div class="brand">
+      <div class="brand-icon">⚛</div>
+      <div class="brand-title">
+        <span class="main-title">JS Master Playground</span>
+        <span class="sub-title">Módulo 4: Introducción a React & Hooks</span>
+      </div>
     </div>
 
-    <div class="grid">
-        <!-- Proyecto Final -->
-        <a href="8.-Proyecto-Final/entregable/cloneTwitter/index.html" class="card" style="grid-column: 1 / -1; border-color: var(--primary);">
-            <span class="tag">PROYECTO FINAL</span>
-            <h3><i class="fa-brands fa-twitter"></i> Clon de Twitter (React + Firebase)</h3>
-            <p>Aplicación completa con autenticación, base de datos en tiempo real y persistencia.</p>
-        </a>
-
-        <a href="8.-Proyecto-Final/entregable/demo/index.html" class="card">
-            <span class="tag">PROYECTO FINAL</span>
-            <h3><i class="fa-brands fa-js"></i> Clon de Twitter (Vanilla JS)</h3>
-            <p>Versión estática interactiva usando Firebase y JS puro.</p>
-        </a>
-
-        <!-- Prácticas anteriores -->
-        <a href="7.-Manejo-de-rutas/entregable/citas-medicas/index.html" class="card">
-            <span class="tag">Módulo 7</span>
-            <h3><i class="fa-solid fa-route"></i> Manejo de Rutas</h3>
-            <p>Aplicación de citas médicas con React Router.</p>
-        </a>
-
-        <a href="6.-Hooks-Avanzados-useRef/entregable/contador-juego/index.html" class="card">
-            <span class="tag">Módulo 6</span>
-            <h3><i class="fa-solid fa-stopwatch"></i> Hooks Avanzados</h3>
-            <p>Uso de useRef para manipulación del DOM y timers.</p>
-        </a>
-
-        <a href="5.-conditional-rendering-composition/entregable/adivina-el-numero/index.html" class="card">
-            <span class="tag">Módulo 5</span>
-            <h3><i class="fa-solid fa-code-branch"></i> Renderizado Condicional</h3>
-            <p>Juego de adivina el número con composición de componentes.</p>
-        </a>
-
-        <a href="4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/index.html" class="card">
-            <span class="tag">Módulo 4</span>
-            <h3><i class="fa-solid fa-rocket"></i> Ciclo de Vida</h3>
-            <p>Explorador espacial usando useEffect y peticiones a APIs.</p>
-        </a>
-
-        <a href="1.-Intro-a-react/entregable/mi-tarjeta/index.html" class="card">
-            <span class="tag">Módulo 1</span>
-            <h3><i class="fa-solid fa-id-card"></i> Introducción a React</h3>
-            <p>Mi primera tarjeta personal en React.</p>
-        </a>
+    <div class="header-badges">
+      <div class="badge-beca">
+        <i data-lucide="award" size="14"></i>
+        <span>DEV.F x Traxión Tech Challenge 2025</span>
+      </div>
+      <div class="badge-module">
+        <i data-lucide="atom" size="14"></i>
+        <span>React 18 & Virtual DOM</span>
+      </div>
     </div>
+  </header>
 
-    <div class="footer">
-        © 2026 Jonathan Medina - Alumno DEV.F
-    </div>
+  <!-- Layout Principal -->
+  <div class="app-container">
+
+    <!-- Sidebar de Temas & Lecciones -->
+    <sidebar id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">
+          <span>Prácticas de React</span>
+          <i data-lucide="layers" size="14"></i>
+        </div>
+        <input type="text" id="searchInput" class="search-box" placeholder="Buscar hook, componente o proyecto...">
+      </div>
+
+      <div class="lessons-list" id="lessonsContainer">
+        <!-- Cargado dinámicamente mediante JS -->
+      </div>
+    </sidebar>
+
+    <!-- Playground de Código, Demo & Consola -->
+    <main id="mainContent">
+      <div class="browser-window">
+
+        <!-- Toolbar estilo IDE -->
+        <div class="browser-toolbar">
+          <div class="window-dots">
+            <div class="dot dot-red"></div>
+            <div class="dot dot-yellow"></div>
+            <div class="dot dot-green"></div>
+          </div>
+
+          <div class="nav-btns">
+            <button class="nav-btn" id="prevBtn" title="Anterior"><i data-lucide="arrow-left" size="16"></i></button>
+            <button class="nav-btn" id="nextBtn" title="Siguiente"><i data-lucide="arrow-right" size="16"></i></button>
+            <button class="nav-btn" id="reloadBtn" title="Recargar"><i data-lucide="rotate-cw" size="16"></i></button>
+          </div>
+
+          <div class="address-bar">
+            <i data-lucide="globe" size="14" style="color: var(--accent);"></i>
+            <span class="address-text" id="addressUrl">http://localhost/4-Introduccion-react-JS/cargando...</span>
+          </div>
+
+          <!-- Selector de Modo en Escritorio (Vista Previa | Código | Consola) -->
+          <div class="mode-tabs" id="modeTabs">
+            <button class="mode-tab active" id="modePreviewBtn">
+              <i data-lucide="globe" size="14"></i> Vista Previa
+            </button>
+            <button class="mode-tab" id="modeCodeBtn">
+              <i data-lucide="code" size="14"></i> Código JSX / JS
+            </button>
+            <button class="mode-tab" id="modeTerminalBtn">
+              <i data-lucide="terminal" size="14"></i> Consola Output
+            </button>
+          </div>
+
+          <div class="toolbar-actions">
+            <button class="btn-action btn-run" id="runCodeBtn" title="Ejecutar script en la consola">
+              <i data-lucide="play" size="14"></i>
+              <span>Ejecutar</span>
+            </button>
+
+            <a id="externalLink" href="#" target="_blank" class="btn-action" title="Abrir archivo directamente">
+              <i data-lucide="external-link" size="14"></i>
+              <span>Archivo</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Área Principal de Trabajo (Iframe + Code Viewer + Terminal + MD) -->
+        <div class="viewport-container" id="viewportContainer">
+          
+          <!-- Vista Iframe para Entregables Web / React -->
+          <iframe id="previewIframe" src="about:blank"></iframe>
+
+          <!-- Visor de Código Fuente JSX / JS -->
+          <div class="code-viewer-pane" id="codeViewerPane">
+            <pre><code id="codeViewer" class="language-jsx">// Selecciona una práctica de React del menú para visualizar su código fuente.</code></pre>
+          </div>
+
+          <!-- Panel de Consola Terminal -->
+          <div class="terminal-pane" id="terminalPane">
+            <div class="terminal-header">
+              <div class="terminal-title">
+                <i data-lucide="terminal" size="14"></i>
+                <span>REACT DEVELOPER CONSOLE (Browser Monitor)</span>
+              </div>
+              <button class="nav-btn" id="clearTerminalBtn" title="Limpiar Consola" style="font-size:0.75rem; gap:4px;">
+                <i data-lucide="trash-2" size="12"></i> Limpiar
+              </button>
+            </div>
+            <div class="terminal-body" id="terminalBody">
+              <div class="log-line system"><span class="log-prompt">$</span> Consola React lista. Salidas de console.log() e inspección de estados aparecerán aquí.</div>
+            </div>
+          </div>
+
+          <!-- Visor de Markdown -->
+          <div class="markdown-pane" id="markdownViewPane">
+            <div id="markdownContent"></div>
+          </div>
+
+        </div>
+
+        <!-- Footer Informativo -->
+        <div class="info-footer">
+          <div class="status-indicator">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Listo</span>
+          </div>
+          <span id="lessonCategory">Módulo 4: Introducción a React</span>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Barra de Navegación Inferior Móvil (4 Focos: Temas, Vista Previa, Código, Consola) -->
+  <nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <button class="nav-tab" id="navTopicsBtn">
+      <i data-lucide="folder-tree" size="18"></i>
+      <span>Temas</span>
+    </button>
+    <button class="nav-tab active" id="navPreviewBtn">
+      <i data-lucide="globe" size="18"></i>
+      <span>Vista Previa</span>
+    </button>
+    <button class="nav-tab" id="navCodeBtn">
+      <i data-lucide="code" size="18"></i>
+      <span>Código</span>
+    </button>
+    <button class="nav-tab" id="navTerminalBtn">
+      <i data-lucide="terminal" size="18"></i>
+      <span>Consola</span>
+      <span class="nav-badge" id="mobileLogBadge" style="display:none;">0</span>
+    </button>
+  </nav>
+
+  <script>
+    // Catálogo de Ejercicios y Lecciones del Módulo 4
+    const itemsData = [
+      // PROYECTOS FINALES
+      {
+        category: "8. Proyecto Final",
+        title: "Clon de Twitter (React + Firebase)",
+        url: "8.-Proyecto-Final/entregable/cloneTwitter/index.html",
+        codeUrl: "8.-Proyecto-Final/entregable/cloneTwitter/src/App.jsx",
+        type: "react",
+        tag: "firebase",
+        desc: "Aplicación SPA completa con autenticación, publicaciones y tiempo real."
+      },
+      {
+        category: "8. Proyecto Final",
+        title: "Clon de Twitter (Vanilla JS)",
+        url: "8.-Proyecto-Final/entregable/demo/index.html",
+        codeUrl: "8.-Proyecto-Final/entregable/demo/index.html",
+        type: "html",
+        tag: "js",
+        desc: "Demostración interactiva usando Firebase y JS puro."
+      },
+      {
+        category: "8. Proyecto Final",
+        title: "Documentación: Proyecto Final (MD)",
+        url: "8.-Proyecto-Final/entregable/readme.md",
+        type: "md",
+        tag: "md",
+        desc: "Arquitectura y especificaciones del clon de Twitter."
+      },
+
+      // LECCIÓN 7
+      {
+        category: "7. Manejo de Rutas (React Router)",
+        title: "Entregable: App Citas Médicas",
+        url: "7.-Manejo-de-rutas/entregable/citas-medicas/index.html",
+        codeUrl: "7.-Manejo-de-rutas/entregable/citas-medicas/src/App.jsx",
+        type: "react",
+        tag: "react",
+        desc: "Navegación SPA con React Router y agendamiento."
+      },
+      {
+        category: "7. Manejo de Rutas (React Router)",
+        title: "Documentación: Rutas (MD)",
+        url: "7.-Manejo-de-rutas/entregable/readme.md",
+        type: "md",
+        tag: "md",
+        desc: "Guía de implementación de React Router DOM."
+      },
+
+      // LECCIÓN 6
+      {
+        category: "6. Hooks Avanzados (useRef)",
+        title: "Entregable: Contador Juego",
+        url: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/index.html",
+        codeUrl: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/src/App.jsx",
+        type: "react",
+        tag: "react",
+        desc: "Uso de useRef para controlar temporizadores y referencias al DOM."
+      },
+      {
+        category: "6. Hooks Avanzados (useRef)",
+        title: "Documentación: useRef (MD)",
+        url: "6.-Hooks-Avanzados-useRef/entregable/readme.md",
+        type: "md",
+        tag: "md",
+        desc: "Guía técnica sobre persistencia de referencias con useRef."
+      },
+
+      // LECCIÓN 5
+      {
+        category: "5. Renderizado Condicional",
+        title: "Entregable: Adivina el Número",
+        url: "5.-conditional-rendering-composition/entregable/adivina-el-numero/index.html",
+        codeUrl: "5.-conditional-rendering-composition/entregable/adivina-el-numero/src/App.jsx",
+        type: "react",
+        tag: "react",
+        desc: "Juego interactivo con composición de componentes y lógica condicional."
+      },
+      {
+        category: "5. Renderizado Condicional",
+        title: "Documentación: Condicionales (MD)",
+        url: "5.-conditional-rendering-composition/entregable/readme.md",
+        type: "md",
+        tag: "md",
+        desc: "Técnicas de composición de componentes en React."
+      },
+
+      // LECCIÓN 4
+      {
+        category: "4. Ciclo de Vida (useEffect)",
+        title: "Entregable: Explorador Espacial",
+        url: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/index.html",
+        codeUrl: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/src/App.jsx",
+        type: "react",
+        tag: "react",
+        desc: "Consumo de API espacial y manejo de efectos con useEffect."
+      },
+      {
+        category: "4. Ciclo de Vida (useEffect)",
+        title: "Documentación: useEffect (MD)",
+        url: "4.-Ciclo-de-vida-componentes/entregable/readme.md",
+        type: "md",
+        tag: "md",
+        desc: "Ciclo de vida y efectos secundarios en React."
+      },
+
+      // LECCIÓN 3
+      {
+        category: "3. Hook useMemo",
+        title: "Entregable: Contador de Tareas",
+        url: "3.-Hook-useMemo-en-React/entregable/contador-tareas/index.html",
+        codeUrl: "3.-Hook-useMemo-en-React/entregable/contador-tareas/src/App.jsx",
+        type: "react",
+        tag: "react",
+        desc: "Optimización de cálculos pesados mediante useMemo."
+      },
+      {
+        category: "3. Hook useMemo",
+        title: "Guía Técnica: useEffect vs useMemo (MD)",
+        url: "3.-Hook-useMemo-en-React/entregable/useEffect-useMemo.md",
+        type: "md",
+        tag: "md",
+        desc: "Comparativa entre efectos y valores memorizados."
+      },
+
+      // LECCIÓN 2
+      {
+        category: "2. Manejo de Estado (useState)",
+        title: "Entregable: Lista de Compras",
+        url: "2.-Manejo-de-Estado/entregable/lista-de-compras/index.html",
+        codeUrl: "2.-Manejo-de-Estado/entregable/lista-de-compras/src/App.jsx",
+        type: "react",
+        tag: "react",
+        desc: "Gestión de estado inmutable con useState."
+      },
+      {
+        category: "2. Manejo de Estado (useState)",
+        title: "Documentación: useState (MD)",
+        url: "2.-Manejo-de-Estado/entregable/ReactStateManagement.md",
+        type: "md",
+        tag: "md",
+        desc: "Principios de manejo de estado en React."
+      },
+
+      // LECCIÓN 1
+      {
+        category: "1. Intro a React & JSX",
+        title: "Entregable: Mi Tarjeta Personal",
+        url: "1.-Intro-a-react/entregable/mi-tarjeta/index.html",
+        codeUrl: "1.-Intro-a-react/entregable/mi-tarjeta/src/App.jsx",
+        type: "react",
+        tag: "react",
+        desc: "Mi primera tarjeta en React con JSX y props."
+      },
+      {
+        category: "1. Intro a React & JSX",
+        title: "Documentación: Intro React (MD)",
+        url: "1.-Intro-a-react/entregable/readme.md",
+        type: "md",
+        tag: "md",
+        desc: "Fundamentos de componentes y sintaxis JSX."
+      }
+    ];
+
+    // Estado Global
+    let currentIndex = 0;
+    let currentContent = '';
+    let logCount = 0;
+    let currentFocus = 'preview'; // 'topics', 'preview', 'code', 'terminal'
+
+    // Elementos DOM
+    const container = document.getElementById('lessonsContainer');
+    const searchInput = document.getElementById('searchInput');
+    const iframe = document.getElementById('previewIframe');
+    const addressUrl = document.getElementById('addressUrl');
+    const externalLink = document.getElementById('externalLink');
+    const reloadBtn = document.getElementById('reloadBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const runCodeBtn = document.getElementById('runCodeBtn');
+    const clearTerminalBtn = document.getElementById('clearTerminalBtn');
+
+    const modePreviewBtn = document.getElementById('modePreviewBtn');
+    const modeCodeBtn = document.getElementById('modeCodeBtn');
+    const modeTerminalBtn = document.getElementById('modeTerminalBtn');
+
+    const codeViewerPane = document.getElementById('codeViewerPane');
+    const codeViewer = document.getElementById('codeViewer');
+    const terminalPane = document.getElementById('terminalPane');
+    const terminalBody = document.getElementById('terminalBody');
+    const markdownViewPane = document.getElementById('markdownViewPane');
+    const markdownContent = document.getElementById('markdownContent');
+
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const lessonCategory = document.getElementById('lessonCategory');
+
+    const navTopicsBtn = document.getElementById('navTopicsBtn');
+    const navPreviewBtn = document.getElementById('navPreviewBtn');
+    const navCodeBtn = document.getElementById('navCodeBtn');
+    const navTerminalBtn = document.getElementById('navTerminalBtn');
+    const mobileLogBadge = document.getElementById('mobileLogBadge');
+
+    // Cambiar Foco Móvil / Desktop
+    function setFocusMode(mode) {
+      currentFocus = mode;
+      document.body.className = `focus-${mode}`;
+
+      navTopicsBtn.classList.toggle('active', mode === 'topics');
+      navPreviewBtn.classList.toggle('active', mode === 'preview');
+      navCodeBtn.classList.toggle('active', mode === 'code');
+      navTerminalBtn.classList.toggle('active', mode === 'terminal');
+
+      modePreviewBtn.classList.toggle('active', mode === 'preview');
+      modeCodeBtn.classList.toggle('active', mode === 'code');
+      modeTerminalBtn.classList.toggle('active', mode === 'terminal');
+
+      const item = itemsData[currentIndex];
+      
+      if (item.type === 'md') {
+        iframe.style.display = 'none';
+        codeViewerPane.style.display = 'none';
+        terminalPane.style.display = 'none';
+        markdownViewPane.style.display = 'block';
+      } else {
+        markdownViewPane.style.display = 'none';
+        iframe.style.display = (mode === 'preview') ? 'block' : 'none';
+        codeViewerPane.style.display = (mode === 'code') ? 'block' : 'none';
+        terminalPane.style.display = (mode === 'terminal') ? 'flex' : 'none';
+      }
+    }
+
+    navTopicsBtn.addEventListener('click', () => setFocusMode('topics'));
+    navPreviewBtn.addEventListener('click', () => setFocusMode('preview'));
+    navCodeBtn.addEventListener('click', () => setFocusMode('code'));
+    navTerminalBtn.addEventListener('click', () => setFocusMode('terminal'));
+
+    modePreviewBtn.addEventListener('click', () => setFocusMode('preview'));
+    modeCodeBtn.addEventListener('click', () => setFocusMode('code'));
+    modeTerminalBtn.addEventListener('click', () => setFocusMode('terminal'));
+
+    // Renderizar Menú Lateral por Categorías
+    function renderLessonsMenu(filter = '') {
+      container.innerHTML = '';
+
+      const filtered = itemsData.filter(item =>
+        item.title.toLowerCase().includes(filter.toLowerCase()) ||
+        item.category.toLowerCase().includes(filter.toLowerCase()) ||
+        item.desc.toLowerCase().includes(filter.toLowerCase())
+      );
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div style="padding:16px; color:var(--text-muted); font-size:0.85rem; text-align:center;">No se encontraron elementos</div>`;
+        return;
+      }
+
+      const categories = {};
+      filtered.forEach(item => {
+        if (!categories[item.category]) categories[item.category] = [];
+        categories[item.category].push(item);
+      });
+
+      for (const [catName, items] of Object.entries(categories)) {
+        const catDiv = document.createElement('div');
+        catDiv.className = 'category-group';
+        
+        catDiv.innerHTML = `
+          <div class="category-title">
+            <i data-lucide="folder" size="12"></i>
+            <span>${catName}</span>
+          </div>
+        `;
+
+        items.forEach(item => {
+          const originalIndex = itemsData.indexOf(item);
+          const itemDiv = document.createElement('div');
+          itemDiv.className = `lesson-item ${originalIndex === currentIndex ? 'active' : ''}`;
+          
+          let iconName = 'atom';
+          if (item.tag === 'firebase') iconName = 'flame';
+          if (item.tag === 'js') iconName = 'code-2';
+          if (item.tag === 'md') iconName = 'file-text';
+
+          itemDiv.innerHTML = `
+            <i data-lucide="${iconName}" size="14"></i>
+            <span class="item-name">${item.title}</span>
+            <span class="item-tag tag-${item.tag}">${item.tag}</span>
+          `;
+
+          itemDiv.addEventListener('click', () => {
+            selectItem(originalIndex);
+            if (window.innerWidth <= 768) {
+              setFocusMode('preview');
+            }
+          });
+
+          catDiv.appendChild(itemDiv);
+        });
+
+        container.appendChild(catDiv);
+      }
+
+      lucide.createIcons();
+    }
+
+    // Interceptar Consola del Iframe
+    function setupIframeConsoleInterceptor() {
+      try {
+        const win = iframe.contentWindow;
+        if (!win) return;
+
+        const origLog = win.console.log;
+        const origInfo = win.console.info;
+        const origWarn = win.console.warn;
+        const origErr = win.console.error;
+
+        win.console.log = (...args) => { appendLog(args.map(formatArg).join(' '), 'log'); if (origLog) origLog.apply(win.console, args); };
+        win.console.info = (...args) => { appendLog(args.map(formatArg).join(' '), 'info'); if (origInfo) origInfo.apply(win.console, args); };
+        win.console.warn = (...args) => { appendLog(args.map(formatArg).join(' '), 'warn'); if (origWarn) origWarn.apply(win.console, args); };
+        win.console.error = (...args) => { appendLog(args.map(formatArg).join(' '), 'error'); if (origErr) origErr.apply(win.console, args); };
+      } catch (e) {}
+    }
+
+    iframe.addEventListener('load', setupIframeConsoleInterceptor);
+
+    // Seleccionar y Cargar Archivo
+    async function selectItem(index) {
+      if (index < 0 || index >= itemsData.length) return;
+      currentIndex = index;
+
+      renderLessonsMenu(searchInput.value);
+
+      const item = itemsData[currentIndex];
+      addressUrl.textContent = `http://localhost/4-Introduccion-react-JS/${item.url}`;
+      externalLink.href = item.url;
+      lessonCategory.textContent = `${item.category} — ${item.desc}`;
+      
+      statusText.textContent = "Cargando práctica de React...";
+      statusDot.style.background = "#f59e0b";
+
+      appendLog(`▶ Seleccionado: ${item.title}`, 'system');
+
+      try {
+        if (item.type === 'md') {
+          const response = await fetch(item.url);
+          currentContent = await response.text();
+          markdownContent.innerHTML = marked.parse(currentContent);
+          runCodeBtn.style.display = 'none';
+          setFocusMode('preview');
+        } else {
+          iframe.src = item.url;
+          
+          // Cargar código fuente (JSX o HTML)
+          const targetCodeUrl = item.codeUrl || item.url;
+          const res = await fetch(targetCodeUrl);
+          if (res.ok) {
+            currentContent = await res.text();
+            codeViewer.className = targetCodeUrl.endsWith('.jsx') ? 'language-jsx' : 'language-markup';
+            codeViewer.textContent = currentContent;
+            Prism.highlightElement(codeViewer);
+          }
+
+          runCodeBtn.style.display = 'none';
+          setFocusMode(currentFocus === 'topics' ? 'preview' : currentFocus);
+        }
+
+        statusText.textContent = "Cargado correctamente";
+        statusDot.style.background = "#10b981";
+
+      } catch (err) {
+        currentContent = `// Error al cargar ${item.url}: ${err.message}`;
+        codeViewer.textContent = currentContent;
+        statusText.textContent = "Error de carga";
+        statusDot.style.background = "#ef4444";
+      }
+    }
+
+    function formatArg(arg) {
+      if (typeof arg === 'object' && arg !== null) {
+        try { return JSON.stringify(arg, null, 2); } catch(e) { return String(arg); }
+      }
+      return String(arg);
+    }
+
+    function appendLog(message, type = 'log') {
+      logCount++;
+      mobileLogBadge.textContent = logCount;
+      mobileLogBadge.style.display = 'inline-block';
+
+      const line = document.createElement('div');
+      line.className = `log-line ${type}`;
+      
+      const prompt = document.createElement('span');
+      prompt.className = 'log-prompt';
+      prompt.textContent = type === 'system' ? '$' : '>';
+      
+      const content = document.createElement('span');
+      content.textContent = message;
+      
+      line.appendChild(prompt);
+      line.appendChild(content);
+      terminalBody.appendChild(line);
+      
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    clearTerminalBtn.addEventListener('click', () => {
+      terminalBody.innerHTML = `<div class="log-line system"><span class="log-prompt">$</span> Consola limpia.</div>`;
+      logCount = 0;
+      mobileLogBadge.style.display = 'none';
+    });
+
+    reloadBtn.addEventListener('click', () => selectItem(currentIndex));
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) selectItem(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < itemsData.length - 1) selectItem(currentIndex + 1);
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      renderLessonsMenu(e.target.value);
+    });
+
+    // Carga Inicial
+    document.addEventListener('DOMContentLoaded', () => {
+      renderLessonsMenu();
+      selectItem(0);
+    });
+  </script>
 </body>
 </html>
