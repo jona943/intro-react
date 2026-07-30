@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>JS Master Playground Módulo 4 | Introducción a React</title>
+  <title>JS Master Playground Módulo 4 | Árbol de Código React</title>
 
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,8 +24,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markdown.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
 </head>
-<body class="focus-preview">
+<body class="focus-code">
 
   <!-- Header Superior -->
   <header>
@@ -33,7 +34,7 @@
       <div class="brand-icon">⚛</div>
       <div class="brand-title">
         <span class="main-title">JS Master Playground</span>
-        <span class="sub-title">Módulo 4: Introducción a React & Hooks</span>
+        <span class="sub-title">Módulo 4: Explorador de Código React & Hooks</span>
       </div>
     </div>
 
@@ -52,18 +53,18 @@
   <!-- Layout Principal -->
   <div class="app-container">
 
-    <!-- Sidebar de Temas & Lecciones -->
+    <!-- Sidebar con Árbol Completo de Archivos (Tree View Explorer) -->
     <sidebar id="sidebar">
       <div class="sidebar-header">
         <div class="sidebar-title">
-          <span>Prácticas de React</span>
-          <i data-lucide="layers" size="14"></i>
+          <span>Árbol de Archivos React</span>
+          <i data-lucide="folder-tree" size="14"></i>
         </div>
-        <input type="text" id="searchInput" class="search-box" placeholder="Buscar hook, componente o proyecto...">
+        <input type="text" id="searchInput" class="search-box" placeholder="Buscar archivo (App.jsx, config...)...">
       </div>
 
-      <div class="lessons-list" id="lessonsContainer">
-        <!-- Cargado dinámicamente mediante JS -->
+      <div class="tree-container" id="treeContainer">
+        <!-- Renderizado dinámico del Árbol de Proyectos -->
       </div>
     </sidebar>
 
@@ -80,23 +81,21 @@
           </div>
 
           <div class="nav-btns">
-            <button class="nav-btn" id="prevBtn" title="Anterior"><i data-lucide="arrow-left" size="16"></i></button>
-            <button class="nav-btn" id="nextBtn" title="Siguiente"><i data-lucide="arrow-right" size="16"></i></button>
             <button class="nav-btn" id="reloadBtn" title="Recargar"><i data-lucide="rotate-cw" size="16"></i></button>
           </div>
 
           <div class="address-bar">
-            <i data-lucide="globe" size="14" style="color: var(--accent);"></i>
-            <span class="address-text" id="addressUrl">http://localhost/4-Introduccion-react-JS/cargando...</span>
+            <i data-lucide="file-code" size="14" style="color: var(--accent);"></i>
+            <span class="address-text" id="addressUrl">http://localhost/4-Introduccion-react-JS/...</span>
           </div>
 
-          <!-- Selector de Modo en Escritorio (Vista Previa | Código | Consola) -->
+          <!-- Selector de Modo en Escritorio (Código | Vista Previa | Consola) -->
           <div class="mode-tabs" id="modeTabs">
-            <button class="mode-tab active" id="modePreviewBtn">
-              <i data-lucide="globe" size="14"></i> Vista Previa
+            <button class="mode-tab active" id="modeCodeBtn">
+              <i data-lucide="code" size="14"></i> Código Fuente
             </button>
-            <button class="mode-tab" id="modeCodeBtn">
-              <i data-lucide="code" size="14"></i> Código JSX / JS
+            <button class="mode-tab" id="modePreviewBtn">
+              <i data-lucide="globe" size="14"></i> Vista Previa
             </button>
             <button class="mode-tab" id="modeTerminalBtn">
               <i data-lucide="terminal" size="14"></i> Consola Output
@@ -104,14 +103,9 @@
           </div>
 
           <div class="toolbar-actions">
-            <button class="btn-action btn-run" id="runCodeBtn" title="Ejecutar script en la consola">
-              <i data-lucide="play" size="14"></i>
-              <span>Ejecutar</span>
-            </button>
-
             <a id="externalLink" href="#" target="_blank" class="btn-action" title="Abrir archivo directamente">
               <i data-lucide="external-link" size="14"></i>
-              <span>Archivo</span>
+              <span>Abrir Archivo</span>
             </a>
           </div>
         </div>
@@ -119,27 +113,27 @@
         <!-- Área Principal de Trabajo (Iframe + Code Viewer + Terminal + MD) -->
         <div class="viewport-container" id="viewportContainer">
           
-          <!-- Vista Iframe para Entregables Web / React -->
-          <iframe id="previewIframe" src="about:blank"></iframe>
-
-          <!-- Visor de Código Fuente JSX / JS -->
+          <!-- Visor de Código Fuente -->
           <div class="code-viewer-pane" id="codeViewerPane">
-            <pre><code id="codeViewer" class="language-jsx">// Selecciona una práctica de React del menú para visualizar su código fuente.</code></pre>
+            <pre><code id="codeViewer" class="language-jsx">// Selecciona un archivo del árbol en la barra lateral para inspeccionar su código fuente JSX.</code></pre>
           </div>
+
+          <!-- Vista Iframe para Entregables Web -->
+          <iframe id="previewIframe" src="about:blank"></iframe>
 
           <!-- Panel de Consola Terminal -->
           <div class="terminal-pane" id="terminalPane">
             <div class="terminal-header">
               <div class="terminal-title">
                 <i data-lucide="terminal" size="14"></i>
-                <span>REACT DEVELOPER CONSOLE (Browser Monitor)</span>
+                <span>REACT DEVELOPER MONITOR</span>
               </div>
               <button class="nav-btn" id="clearTerminalBtn" title="Limpiar Consola" style="font-size:0.75rem; gap:4px;">
                 <i data-lucide="trash-2" size="12"></i> Limpiar
               </button>
             </div>
             <div class="terminal-body" id="terminalBody">
-              <div class="log-line system"><span class="log-prompt">$</span> Consola React lista. Salidas de console.log() e inspección de estados aparecerán aquí.</div>
+              <div class="log-line system"><span class="log-prompt">$</span> Consola React lista.</div>
             </div>
           </div>
 
@@ -154,9 +148,9 @@
         <div class="info-footer">
           <div class="status-indicator">
             <div class="status-dot" id="statusDot"></div>
-            <span id="statusText">Listo</span>
+            <span id="statusText">Selecciona un archivo del árbol</span>
           </div>
-          <span id="lessonCategory">Módulo 4: Introducción a React</span>
+          <span id="lessonCategory">Módulo 4: React & Hooks</span>
         </div>
 
       </div>
@@ -164,19 +158,19 @@
 
   </div>
 
-  <!-- Barra de Navegación Inferior Móvil (4 Focos: Temas, Vista Previa, Código, Consola) -->
+  <!-- Barra de Navegación Inferior Móvil (4 Focos) -->
   <nav class="mobile-bottom-nav" id="mobileBottomNav">
-    <button class="nav-tab" id="navTopicsBtn">
+    <button class="nav-tab active" id="navTopicsBtn">
       <i data-lucide="folder-tree" size="18"></i>
-      <span>Temas</span>
-    </button>
-    <button class="nav-tab active" id="navPreviewBtn">
-      <i data-lucide="globe" size="18"></i>
-      <span>Vista Previa</span>
+      <span>Árbol</span>
     </button>
     <button class="nav-tab" id="navCodeBtn">
       <i data-lucide="code" size="18"></i>
       <span>Código</span>
+    </button>
+    <button class="nav-tab" id="navPreviewBtn">
+      <i data-lucide="globe" size="18"></i>
+      <span>Vista Previa</span>
     </button>
     <button class="nav-tab" id="navTerminalBtn">
       <i data-lucide="terminal" size="18"></i>
@@ -186,186 +180,147 @@
   </nav>
 
   <script>
-    // Catálogo de Ejercicios y Lecciones del Módulo 4
-    const itemsData = [
-      // PROYECTOS FINALES
+    // Catálogo Estructurado en Árbol de Todos los Proyectos de React
+    const projectsTreeData = [
       {
-        category: "8. Proyecto Final",
-        title: "Clon de Twitter (React + Firebase)",
-        url: "8.-Proyecto-Final/entregable/cloneTwitter/index.html",
-        codeUrl: "8.-Proyecto-Final/entregable/cloneTwitter/src/App.jsx",
-        type: "react",
+        id: "p8-twitter-react",
+        title: "8. Proyecto Final: Clon de Twitter (React + Firebase)",
         tag: "firebase",
-        desc: "Aplicación SPA completa con autenticación, publicaciones y tiempo real."
+        demoUrl: "8.-Proyecto-Final/entregable/cloneTwitter/index.html",
+        files: [
+          { name: "src/App.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/main.jsx", lang: "jsx" },
+          { name: "src/index.css", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/index.css", lang: "css" },
+          { name: "src/components/TweetForm.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/components/TweetForm.jsx", lang: "jsx" },
+          { name: "src/components/TweetItem.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/components/TweetItem.jsx", lang: "jsx" },
+          { name: "src/components/TweetList.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/components/TweetList.jsx", lang: "jsx" },
+          { name: "src/firebase/config.js", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/firebase/config.js", lang: "javascript" },
+          { name: "src/firebase/tweetService.js", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/firebase/tweetService.js", lang: "javascript" },
+          { name: "src/pages/Home.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/pages/Home.jsx", lang: "jsx" },
+          { name: "src/pages/Login.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/pages/Login.jsx", lang: "jsx" },
+          { name: "src/pages/Profile.jsx", url: "8.-Proyecto-Final/entregable/cloneTwitter/src/pages/Profile.jsx", lang: "jsx" },
+          { name: "index.html", url: "8.-Proyecto-Final/entregable/cloneTwitter/index.html", lang: "markup" },
+          { name: "package.json", url: "8.-Proyecto-Final/entregable/cloneTwitter/package.json", lang: "json" },
+          { name: "readme.md", url: "8.-Proyecto-Final/entregable/readme.md", lang: "markdown" }
+        ]
       },
       {
-        category: "8. Proyecto Final",
-        title: "Clon de Twitter (Vanilla JS)",
-        url: "8.-Proyecto-Final/entregable/demo/index.html",
-        codeUrl: "8.-Proyecto-Final/entregable/demo/index.html",
-        type: "html",
+        id: "p8-twitter-vanilla",
+        title: "8. Proyecto Final: Clon de Twitter (Vanilla JS)",
         tag: "js",
-        desc: "Demostración interactiva usando Firebase y JS puro."
+        demoUrl: "8.-Proyecto-Final/entregable/demo/index.html",
+        files: [
+          { name: "index.html", url: "8.-Proyecto-Final/entregable/demo/index.html", lang: "markup" }
+        ]
       },
       {
-        category: "8. Proyecto Final",
-        title: "Documentación: Proyecto Final (MD)",
-        url: "8.-Proyecto-Final/entregable/readme.md",
-        type: "md",
-        tag: "md",
-        desc: "Arquitectura y especificaciones del clon de Twitter."
-      },
-
-      // LECCIÓN 7
-      {
-        category: "7. Manejo de Rutas (React Router)",
-        title: "Entregable: App Citas Médicas",
-        url: "7.-Manejo-de-rutas/entregable/citas-medicas/index.html",
-        codeUrl: "7.-Manejo-de-rutas/entregable/citas-medicas/src/App.jsx",
-        type: "react",
+        id: "p7-citas-medicas",
+        title: "7. Manejo de Rutas: App Citas Médicas",
         tag: "react",
-        desc: "Navegación SPA con React Router y agendamiento."
+        demoUrl: "7.-Manejo-de-rutas/entregable/citas-medicas/index.html",
+        files: [
+          { name: "src/App.jsx", url: "7.-Manejo-de-rutas/entregable/citas-medicas/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "7.-Manejo-de-rutas/entregable/citas-medicas/src/main.jsx", lang: "jsx" },
+          { name: "index.html", url: "7.-Manejo-de-rutas/entregable/citas-medicas/index.html", lang: "markup" },
+          { name: "package.json", url: "7.-Manejo-de-rutas/entregable/citas-medicas/package.json", lang: "json" },
+          { name: "readme.md", url: "7.-Manejo-de-rutas/entregable/readme.md", lang: "markdown" }
+        ]
       },
       {
-        category: "7. Manejo de Rutas (React Router)",
-        title: "Documentación: Rutas (MD)",
-        url: "7.-Manejo-de-rutas/entregable/readme.md",
-        type: "md",
-        tag: "md",
-        desc: "Guía de implementación de React Router DOM."
-      },
-
-      // LECCIÓN 6
-      {
-        category: "6. Hooks Avanzados (useRef)",
-        title: "Entregable: Contador Juego",
-        url: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/index.html",
-        codeUrl: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/src/App.jsx",
-        type: "react",
+        id: "p6-contador-juego",
+        title: "6. Hooks Avanzados: Contador Juego (useRef)",
         tag: "react",
-        desc: "Uso de useRef para controlar temporizadores y referencias al DOM."
+        demoUrl: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/index.html",
+        files: [
+          { name: "src/App.jsx", url: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/src/main.jsx", lang: "jsx" },
+          { name: "index.html", url: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/index.html", lang: "markup" },
+          { name: "package.json", url: "6.-Hooks-Avanzados-useRef/entregable/contador-juego/package.json", lang: "json" },
+          { name: "readme.md", url: "6.-Hooks-Avanzados-useRef/entregable/readme.md", lang: "markdown" }
+        ]
       },
       {
-        category: "6. Hooks Avanzados (useRef)",
-        title: "Documentación: useRef (MD)",
-        url: "6.-Hooks-Avanzados-useRef/entregable/readme.md",
-        type: "md",
-        tag: "md",
-        desc: "Guía técnica sobre persistencia de referencias con useRef."
-      },
-
-      // LECCIÓN 5
-      {
-        category: "5. Renderizado Condicional",
-        title: "Entregable: Adivina el Número",
-        url: "5.-conditional-rendering-composition/entregable/adivina-el-numero/index.html",
-        codeUrl: "5.-conditional-rendering-composition/entregable/adivina-el-numero/src/App.jsx",
-        type: "react",
+        id: "p5-adivina-numero",
+        title: "5. Renderizado Condicional: Adivina el Número",
         tag: "react",
-        desc: "Juego interactivo con composición de componentes y lógica condicional."
+        demoUrl: "5.-conditional-rendering-composition/entregable/adivina-el-numero/index.html",
+        files: [
+          { name: "src/App.jsx", url: "5.-conditional-rendering-composition/entregable/adivina-el-numero/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "5.-conditional-rendering-composition/entregable/adivina-el-numero/src/main.jsx", lang: "jsx" },
+          { name: "index.html", url: "5.-conditional-rendering-composition/entregable/adivina-el-numero/index.html", lang: "markup" },
+          { name: "package.json", url: "5.-conditional-rendering-composition/entregable/adivina-el-numero/package.json", lang: "json" },
+          { name: "readme.md", url: "5.-conditional-rendering-composition/entregable/readme.md", lang: "markdown" }
+        ]
       },
       {
-        category: "5. Renderizado Condicional",
-        title: "Documentación: Condicionales (MD)",
-        url: "5.-conditional-rendering-composition/entregable/readme.md",
-        type: "md",
-        tag: "md",
-        desc: "Técnicas de composición de componentes en React."
-      },
-
-      // LECCIÓN 4
-      {
-        category: "4. Ciclo de Vida (useEffect)",
-        title: "Entregable: Explorador Espacial",
-        url: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/index.html",
-        codeUrl: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/src/App.jsx",
-        type: "react",
+        id: "p4-explorador-espacial",
+        title: "4. Ciclo de Vida: Explorador Espacial (useEffect)",
         tag: "react",
-        desc: "Consumo de API espacial y manejo de efectos con useEffect."
+        demoUrl: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/index.html",
+        files: [
+          { name: "src/App.jsx", url: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/src/main.jsx", lang: "jsx" },
+          { name: "index.html", url: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/index.html", lang: "markup" },
+          { name: "package.json", url: "4.-Ciclo-de-vida-componentes/entregable/explorador-espacial/package.json", lang: "json" },
+          { name: "readme.md", url: "4.-Ciclo-de-vida-componentes/entregable/readme.md", lang: "markdown" }
+        ]
       },
       {
-        category: "4. Ciclo de Vida (useEffect)",
-        title: "Documentación: useEffect (MD)",
-        url: "4.-Ciclo-de-vida-componentes/entregable/readme.md",
-        type: "md",
-        tag: "md",
-        desc: "Ciclo de vida y efectos secundarios en React."
-      },
-
-      // LECCIÓN 3
-      {
-        category: "3. Hook useMemo",
-        title: "Entregable: Contador de Tareas",
-        url: "3.-Hook-useMemo-en-React/entregable/contador-tareas/index.html",
-        codeUrl: "3.-Hook-useMemo-en-React/entregable/contador-tareas/src/App.jsx",
-        type: "react",
+        id: "p3-contador-tareas",
+        title: "3. Hook useMemo: Contador de Tareas",
         tag: "react",
-        desc: "Optimización de cálculos pesados mediante useMemo."
+        demoUrl: "3.-Hook-useMemo-en-React/entregable/contador-tareas/index.html",
+        files: [
+          { name: "src/App.jsx", url: "3.-Hook-useMemo-en-React/entregable/contador-tareas/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "3.-Hook-useMemo-en-React/entregable/contador-tareas/src/main.jsx", lang: "jsx" },
+          { name: "index.html", url: "3.-Hook-useMemo-en-React/entregable/contador-tareas/index.html", lang: "markup" },
+          { name: "package.json", url: "3.-Hook-useMemo-en-React/entregable/contador-tareas/package.json", lang: "json" },
+          { name: "useEffect-useMemo.md", url: "3.-Hook-useMemo-en-React/entregable/useEffect-useMemo.md", lang: "markdown" },
+          { name: "readme.md", url: "3.-Hook-useMemo-en-React/entregable/readme.md", lang: "markdown" }
+        ]
       },
       {
-        category: "3. Hook useMemo",
-        title: "Guía Técnica: useEffect vs useMemo (MD)",
-        url: "3.-Hook-useMemo-en-React/entregable/useEffect-useMemo.md",
-        type: "md",
-        tag: "md",
-        desc: "Comparativa entre efectos y valores memorizados."
-      },
-
-      // LECCIÓN 2
-      {
-        category: "2. Manejo de Estado (useState)",
-        title: "Entregable: Lista de Compras",
-        url: "2.-Manejo-de-Estado/entregable/lista-de-compras/index.html",
-        codeUrl: "2.-Manejo-de-Estado/entregable/lista-de-compras/src/App.jsx",
-        type: "react",
+        id: "p2-lista-compras",
+        title: "2. Manejo de Estado: Lista de Compras (useState)",
         tag: "react",
-        desc: "Gestión de estado inmutable con useState."
+        demoUrl: "2.-Manejo-de-Estado/entregable/lista-de-compras/index.html",
+        files: [
+          { name: "src/App.jsx", url: "2.-Manejo-de-Estado/entregable/lista-de-compras/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "2.-Manejo-de-Estado/entregable/lista-de-compras/src/main.jsx", lang: "jsx" },
+          { name: "index.html", url: "2.-Manejo-de-Estado/entregable/lista-de-compras/index.html", lang: "markup" },
+          { name: "package.json", url: "2.-Manejo-de-Estado/entregable/lista-de-compras/package.json", lang: "json" },
+          { name: "ReactStateManagement.md", url: "2.-Manejo-de-Estado/entregable/ReactStateManagement.md", lang: "markdown" },
+          { name: "readme.md", url: "2.-Manejo-de-Estado/entregable/readme.md", lang: "markdown" }
+        ]
       },
       {
-        category: "2. Manejo de Estado (useState)",
-        title: "Documentación: useState (MD)",
-        url: "2.-Manejo-de-Estado/entregable/ReactStateManagement.md",
-        type: "md",
-        tag: "md",
-        desc: "Principios de manejo de estado en React."
-      },
-
-      // LECCIÓN 1
-      {
-        category: "1. Intro a React & JSX",
-        title: "Entregable: Mi Tarjeta Personal",
-        url: "1.-Intro-a-react/entregable/mi-tarjeta/index.html",
-        codeUrl: "1.-Intro-a-react/entregable/mi-tarjeta/src/App.jsx",
-        type: "react",
+        id: "p1-mi-tarjeta",
+        title: "1. Intro a React: Mi Tarjeta Personal",
         tag: "react",
-        desc: "Mi primera tarjeta en React con JSX y props."
-      },
-      {
-        category: "1. Intro a React & JSX",
-        title: "Documentación: Intro React (MD)",
-        url: "1.-Intro-a-react/entregable/readme.md",
-        type: "md",
-        tag: "md",
-        desc: "Fundamentos de componentes y sintaxis JSX."
+        demoUrl: "1.-Intro-a-react/entregable/mi-tarjeta/index.html",
+        files: [
+          { name: "src/App.jsx", url: "1.-Intro-a-react/entregable/mi-tarjeta/src/App.jsx", lang: "jsx" },
+          { name: "src/main.jsx", url: "1.-Intro-a-react/entregable/mi-tarjeta/src/main.jsx", lang: "jsx" },
+          { name: "index.html", url: "1.-Intro-a-react/entregable/mi-tarjeta/index.html", lang: "markup" },
+          { name: "package.json", url: "1.-Intro-a-react/entregable/mi-tarjeta/package.json", lang: "json" },
+          { name: "readme.md", url: "1.-Intro-a-react/entregable/readme.md", lang: "markdown" }
+        ]
       }
     ];
 
     // Estado Global
-    let currentIndex = 0;
+    let activeFileUrl = '';
     let currentContent = '';
     let logCount = 0;
-    let currentFocus = 'preview'; // 'topics', 'preview', 'code', 'terminal'
+    let currentFocus = 'code';
 
     // Elementos DOM
-    const container = document.getElementById('lessonsContainer');
+    const treeContainer = document.getElementById('treeContainer');
     const searchInput = document.getElementById('searchInput');
     const iframe = document.getElementById('previewIframe');
     const addressUrl = document.getElementById('addressUrl');
     const externalLink = document.getElementById('externalLink');
     const reloadBtn = document.getElementById('reloadBtn');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const runCodeBtn = document.getElementById('runCodeBtn');
     const clearTerminalBtn = document.getElementById('clearTerminalBtn');
 
     const modePreviewBtn = document.getElementById('modePreviewBtn');
@@ -384,8 +339,8 @@
     const lessonCategory = document.getElementById('lessonCategory');
 
     const navTopicsBtn = document.getElementById('navTopicsBtn');
-    const navPreviewBtn = document.getElementById('navPreviewBtn');
     const navCodeBtn = document.getElementById('navCodeBtn');
+    const navPreviewBtn = document.getElementById('navPreviewBtn');
     const navTerminalBtn = document.getElementById('navTerminalBtn');
     const mobileLogBadge = document.getElementById('mobileLogBadge');
 
@@ -395,17 +350,15 @@
       document.body.className = `focus-${mode}`;
 
       navTopicsBtn.classList.toggle('active', mode === 'topics');
-      navPreviewBtn.classList.toggle('active', mode === 'preview');
       navCodeBtn.classList.toggle('active', mode === 'code');
+      navPreviewBtn.classList.toggle('active', mode === 'preview');
       navTerminalBtn.classList.toggle('active', mode === 'terminal');
 
-      modePreviewBtn.classList.toggle('active', mode === 'preview');
       modeCodeBtn.classList.toggle('active', mode === 'code');
+      modePreviewBtn.classList.toggle('active', mode === 'preview');
       modeTerminalBtn.classList.toggle('active', mode === 'terminal');
 
-      const item = itemsData[currentIndex];
-      
-      if (item.type === 'md') {
+      if (activeFileUrl.endsWith('.md')) {
         iframe.style.display = 'none';
         codeViewerPane.style.display = 'none';
         terminalPane.style.display = 'none';
@@ -419,144 +372,127 @@
     }
 
     navTopicsBtn.addEventListener('click', () => setFocusMode('topics'));
-    navPreviewBtn.addEventListener('click', () => setFocusMode('preview'));
     navCodeBtn.addEventListener('click', () => setFocusMode('code'));
+    navPreviewBtn.addEventListener('click', () => setFocusMode('preview'));
     navTerminalBtn.addEventListener('click', () => setFocusMode('terminal'));
 
-    modePreviewBtn.addEventListener('click', () => setFocusMode('preview'));
     modeCodeBtn.addEventListener('click', () => setFocusMode('code'));
+    modePreviewBtn.addEventListener('click', () => setFocusMode('preview'));
     modeTerminalBtn.addEventListener('click', () => setFocusMode('terminal'));
 
-    // Renderizar Menú Lateral por Categorías
-    function renderLessonsMenu(filter = '') {
-      container.innerHTML = '';
+    // Renderizar Árbol de Proyectos (Tree View Explorer)
+    function renderProjectTree(filter = '') {
+      treeContainer.innerHTML = '';
 
-      const filtered = itemsData.filter(item =>
-        item.title.toLowerCase().includes(filter.toLowerCase()) ||
-        item.category.toLowerCase().includes(filter.toLowerCase()) ||
-        item.desc.toLowerCase().includes(filter.toLowerCase())
-      );
+      projectsTreeData.forEach((project, pIndex) => {
+        // Filtrar archivos por término de búsqueda
+        const matchingFiles = project.files.filter(f => 
+          f.name.toLowerCase().includes(filter.toLowerCase()) ||
+          project.title.toLowerCase().includes(filter.toLowerCase())
+        );
 
-      if (filtered.length === 0) {
-        container.innerHTML = `<div style="padding:16px; color:var(--text-muted); font-size:0.85rem; text-align:center;">No se encontraron elementos</div>`;
-        return;
-      }
+        if (filter && matchingFiles.length === 0) return;
 
-      const categories = {};
-      filtered.forEach(item => {
-        if (!categories[item.category]) categories[item.category] = [];
-        categories[item.category].push(item);
-      });
-
-      for (const [catName, items] of Object.entries(categories)) {
-        const catDiv = document.createElement('div');
-        catDiv.className = 'category-group';
+        const node = document.createElement('div');
+        node.className = `project-node ${pIndex !== 0 && !filter ? 'collapsed' : ''}`;
         
-        catDiv.innerHTML = `
-          <div class="category-title">
-            <i data-lucide="folder" size="12"></i>
-            <span>${catName}</span>
+        node.innerHTML = `
+          <div class="project-header">
+            <i data-lucide="chevron-down" size="14" class="chevron"></i>
+            <i data-lucide="folder-git-2" size="16" style="color:var(--accent);"></i>
+            <span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${project.title}</span>
           </div>
+          <div class="project-files"></div>
         `;
 
-        items.forEach(item => {
-          const originalIndex = itemsData.indexOf(item);
-          const itemDiv = document.createElement('div');
-          itemDiv.className = `lesson-item ${originalIndex === currentIndex ? 'active' : ''}`;
-          
-          let iconName = 'atom';
-          if (item.tag === 'firebase') iconName = 'flame';
-          if (item.tag === 'js') iconName = 'code-2';
-          if (item.tag === 'md') iconName = 'file-text';
+        const headerEl = node.querySelector('.project-header');
+        const filesEl = node.querySelector('.project-files');
 
-          itemDiv.innerHTML = `
+        headerEl.addEventListener('click', () => {
+          node.classList.toggle('collapsed');
+          // Al hacer clic en el título del proyecto, cargar su demo en la pestaña de vista previa
+          if (project.demoUrl) {
+            iframe.src = project.demoUrl;
+          }
+        });
+
+        const filesToRender = filter ? matchingFiles : project.files;
+
+        filesToRender.forEach(file => {
+          const fileDiv = document.createElement('div');
+          fileDiv.className = `file-item ${file.url === activeFileUrl ? 'active' : ''}`;
+
+          let iconName = 'file-code';
+          if (file.lang === 'markdown') iconName = 'file-text';
+          if (file.lang === 'json') iconName = 'file-json';
+          if (file.lang === 'css') iconName = 'palette';
+          if (file.lang === 'markup') iconName = 'globe';
+
+          fileDiv.innerHTML = `
             <i data-lucide="${iconName}" size="14"></i>
-            <span class="item-name">${item.title}</span>
-            <span class="item-tag tag-${item.tag}">${item.tag}</span>
+            <span class="file-name">${file.name}</span>
+            <span class="file-badge tag-${project.tag}">${file.lang}</span>
           `;
 
-          itemDiv.addEventListener('click', () => {
-            selectItem(originalIndex);
+          fileDiv.addEventListener('click', (e) => {
+            e.stopPropagation();
+            loadFile(file, project);
             if (window.innerWidth <= 768) {
-              setFocusMode('preview');
+              setFocusMode(file.lang === 'markdown' ? 'preview' : 'code');
             }
           });
 
-          catDiv.appendChild(itemDiv);
+          filesEl.appendChild(fileDiv);
         });
 
-        container.appendChild(catDiv);
-      }
+        treeContainer.appendChild(node);
+      });
 
       lucide.createIcons();
     }
 
-    // Interceptar Consola del Iframe
-    function setupIframeConsoleInterceptor() {
-      try {
-        const win = iframe.contentWindow;
-        if (!win) return;
+    // Cargar e Inspeccionar Archivo del Árbol
+    async function loadFile(file, project) {
+      activeFileUrl = file.url;
 
-        const origLog = win.console.log;
-        const origInfo = win.console.info;
-        const origWarn = win.console.warn;
-        const origErr = win.console.error;
+      document.querySelectorAll('.file-item').forEach(el => el.classList.remove('active'));
+      renderProjectTree(searchInput.value);
 
-        win.console.log = (...args) => { appendLog(args.map(formatArg).join(' '), 'log'); if (origLog) origLog.apply(win.console, args); };
-        win.console.info = (...args) => { appendLog(args.map(formatArg).join(' '), 'info'); if (origInfo) origInfo.apply(win.console, args); };
-        win.console.warn = (...args) => { appendLog(args.map(formatArg).join(' '), 'warn'); if (origWarn) origWarn.apply(win.console, args); };
-        win.console.error = (...args) => { appendLog(args.map(formatArg).join(' '), 'error'); if (origErr) origErr.apply(win.console, args); };
-      } catch (e) {}
-    }
-
-    iframe.addEventListener('load', setupIframeConsoleInterceptor);
-
-    // Seleccionar y Cargar Archivo
-    async function selectItem(index) {
-      if (index < 0 || index >= itemsData.length) return;
-      currentIndex = index;
-
-      renderLessonsMenu(searchInput.value);
-
-      const item = itemsData[currentIndex];
-      addressUrl.textContent = `http://localhost/4-Introduccion-react-JS/${item.url}`;
-      externalLink.href = item.url;
-      lessonCategory.textContent = `${item.category} — ${item.desc}`;
+      addressUrl.textContent = `http://localhost/4-Introduccion-react-JS/${file.url}`;
+      externalLink.href = file.url;
+      lessonCategory.textContent = `${project.title} — ${file.name}`;
       
-      statusText.textContent = "Cargando práctica de React...";
+      statusText.textContent = `Cargando ${file.name}...`;
       statusDot.style.background = "#f59e0b";
 
-      appendLog(`▶ Seleccionado: ${item.title}`, 'system');
+      appendLog(`▶ Abriendo archivo: ${file.name} (${file.url})`, 'system');
 
       try {
-        if (item.type === 'md') {
-          const response = await fetch(item.url);
-          currentContent = await response.text();
+        const response = await fetch(file.url);
+        if (!response.ok) throw new Error(`HTTP status ${response.status}`);
+        currentContent = await response.text();
+
+        if (file.lang === 'markdown') {
           markdownContent.innerHTML = marked.parse(currentContent);
-          runCodeBtn.style.display = 'none';
           setFocusMode('preview');
         } else {
-          iframe.src = item.url;
-          
-          // Cargar código fuente (JSX o HTML)
-          const targetCodeUrl = item.codeUrl || item.url;
-          const res = await fetch(targetCodeUrl);
-          if (res.ok) {
-            currentContent = await res.text();
-            codeViewer.className = targetCodeUrl.endsWith('.jsx') ? 'language-jsx' : 'language-markup';
-            codeViewer.textContent = currentContent;
-            Prism.highlightElement(codeViewer);
+          codeViewer.className = `language-${file.lang}`;
+          codeViewer.textContent = currentContent;
+          Prism.highlightElement(codeViewer);
+
+          // Si el proyecto tiene iframe demoUrl, asignarlo al iframe
+          if (project.demoUrl) {
+            iframe.src = project.demoUrl;
           }
 
-          runCodeBtn.style.display = 'none';
-          setFocusMode(currentFocus === 'topics' ? 'preview' : currentFocus);
+          setFocusMode('code');
         }
 
-        statusText.textContent = "Cargado correctamente";
+        statusText.textContent = "Archivo cargado correctamente";
         statusDot.style.background = "#10b981";
 
       } catch (err) {
-        currentContent = `// Error al cargar ${item.url}: ${err.message}`;
+        currentContent = `// Error al cargar ${file.url}: ${err.message}`;
         codeViewer.textContent = currentContent;
         statusText.textContent = "Error de carga";
         statusDot.style.background = "#ef4444";
@@ -598,24 +534,25 @@
       mobileLogBadge.style.display = 'none';
     });
 
-    reloadBtn.addEventListener('click', () => selectItem(currentIndex));
-
-    prevBtn.addEventListener('click', () => {
-      if (currentIndex > 0) selectItem(currentIndex - 1);
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (currentIndex < itemsData.length - 1) selectItem(currentIndex + 1);
+    reloadBtn.addEventListener('click', () => {
+      if (activeFileUrl) {
+        const item = projectsTreeData.flatMap(p => p.files).find(f => f.url === activeFileUrl);
+        const proj = projectsTreeData.find(p => p.files.includes(item));
+        if (item && proj) loadFile(item, proj);
+      }
     });
 
     searchInput.addEventListener('input', (e) => {
-      renderLessonsMenu(e.target.value);
+      renderProjectTree(e.target.value);
     });
 
     // Carga Inicial
     document.addEventListener('DOMContentLoaded', () => {
-      renderLessonsMenu();
-      selectItem(0);
+      renderProjectTree();
+      // Cargar App.jsx del Clon de Twitter por defecto
+      const defaultProject = projectsTreeData[0];
+      const defaultFile = defaultProject.files[0];
+      loadFile(defaultFile, defaultProject);
     });
   </script>
 </body>
